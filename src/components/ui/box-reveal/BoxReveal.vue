@@ -10,7 +10,7 @@ interface BoxRevealProps {
 }
 
 const props = withDefaults(defineProps<BoxRevealProps>(), {
-  color: "#5046e6",
+  color: "#3b82f6",
   duration: 0.5,
   delay: 0.25,
 });
