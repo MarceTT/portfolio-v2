@@ -1,5 +1,6 @@
 # Portfolio - Marcelo Toro
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-marcelo--toro--portfolio.netlify.app-00C7B7?style=flat-square&logo=netlify&logoColor=white)](https://marcelo-toro-portfolio.netlify.app/)
 [![Vue.js](https://img.shields.io/badge/Vue.js-3.5-4FC08D?style=flat-square&logo=vue.js&logoColor=white)](https://vuejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
@@ -7,7 +8,7 @@
 
 Personal portfolio website showcasing my experience as a Senior Full Stack Developer with 10+ years building scalable web applications.
 
-<!-- ![Portfolio Preview](./preview.png) -->
+**[View Live Demo →](https://marcelo-toro-portfolio.netlify.app/)**
 
 ## Features
 
