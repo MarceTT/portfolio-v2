@@ -69,6 +69,8 @@ const filteredNavItems = () => {
   <div class="fixed bottom-4 left-1/2 z-50 -translate-x-1/2 sm:bottom-6">
     <Dock
       direction="middle"
+      :magnification="isMobile ? 0 : 60"
+      :distance="isMobile ? 0 : 140"
       class="rounded-full border border-border/50 bg-background/80 px-2 shadow-xl backdrop-blur-md sm:px-4"
     >
       <!-- Navigation Items -->
