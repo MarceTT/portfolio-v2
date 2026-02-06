@@ -1,25 +1,36 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref, onUnmounted } from 'vue'
 import { Dock, DockIcon, DockSeparator } from '@/components/ui/dock'
 import { useTheme } from '@/composables/useTheme'
 
 const { isDark, toggleTheme, initTheme } = useTheme()
 
+const isMobile = ref(false)
+
+const checkMobile = () => {
+  isMobile.value = window.innerWidth < 640
+}
+
 onMounted(() => {
-  // Clear old conflicting keys
   localStorage.removeItem('theme')
   localStorage.removeItem('vueuse-color-scheme')
-  
   initTheme()
+  
+  checkMobile()
+  window.addEventListener('resize', checkMobile)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', checkMobile)
 })
 
 const navItems = [
-  { icon: 'home', label: 'Home', href: '#hero' },
-  { icon: 'user', label: 'About', href: '#about' },
-  { icon: 'code', label: 'Skills', href: '#skills' },
-  { icon: 'folder', label: 'Projects', href: '#projects' },
-  { icon: 'briefcase', label: 'Experience', href: '#experience' },
-  { icon: 'mail', label: 'Contact', href: '#contact' },
+  { icon: 'home', label: 'Home', href: '#hero', showMobile: true },
+  { icon: 'user', label: 'About', href: '#about', showMobile: false },
+  { icon: 'code', label: 'Skills', href: '#skills', showMobile: false },
+  { icon: 'folder', label: 'Projects', href: '#projects', showMobile: true },
+  { icon: 'briefcase', label: 'Experience', href: '#experience', showMobile: false },
+  { icon: 'mail', label: 'Contact', href: '#contact', showMobile: true },
 ]
 
 const socialLinks = [
@@ -45,24 +56,31 @@ const getIconPath = (icon: string) => {
   }
   return icons[icon] || icons.home
 }
+
+const filteredNavItems = () => {
+  if (isMobile.value) {
+    return navItems.filter(item => item.showMobile)
+  }
+  return navItems
+}
 </script>
 
 <template>
-  <div class="fixed bottom-6 left-1/2 z-50 -translate-x-1/2">
+  <div class="fixed bottom-4 left-1/2 z-50 -translate-x-1/2 sm:bottom-6">
     <Dock
       direction="middle"
-      class="rounded-full border border-border/50 bg-background/80 px-4 shadow-xl backdrop-blur-md"
+      class="rounded-full border border-border/50 bg-background/80 px-2 shadow-xl backdrop-blur-md sm:px-4"
     >
       <!-- Navigation Items -->
       <DockIcon
-        v-for="item in navItems"
+        v-for="item in filteredNavItems()"
         :key="item.label"
-        class="cursor-pointer rounded-full bg-transparent p-2.5 transition-colors hover:bg-muted"
+        class="cursor-pointer rounded-full bg-transparent p-1.5 transition-colors hover:bg-muted sm:p-2.5"
         :title="item.label"
         @click="scrollToSection(item.href)"
       >
         <svg
-          class="h-5 w-5 text-foreground/70"
+          class="h-4 w-4 text-foreground/70 sm:h-5 sm:w-5"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -74,11 +92,11 @@ const getIconPath = (icon: string) => {
 
       <DockSeparator />
 
-      <!-- Social Links - Wrapped in <a> tags -->
+      <!-- Social Links -->
       <DockIcon
         v-for="link in socialLinks"
         :key="link.label"
-        class="cursor-pointer rounded-full bg-transparent p-2.5 transition-colors hover:bg-muted"
+        class="cursor-pointer rounded-full bg-transparent p-1.5 transition-colors hover:bg-muted sm:p-2.5"
         :title="link.label"
       >
         <a
@@ -88,7 +106,7 @@ const getIconPath = (icon: string) => {
           class="flex items-center justify-center"
         >
           <svg
-            class="h-5 w-5 text-foreground/70"
+            class="h-4 w-4 text-foreground/70 sm:h-5 sm:w-5"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -103,14 +121,14 @@ const getIconPath = (icon: string) => {
 
       <!-- Dark/Light Mode Toggle -->
       <DockIcon
-        class="cursor-pointer rounded-full bg-transparent p-2.5 transition-colors hover:bg-muted"
+        class="cursor-pointer rounded-full bg-transparent p-1.5 transition-colors hover:bg-muted sm:p-2.5"
         :title="isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'"
         @click="toggleTheme"
       >
         <!-- Sun icon (shown in dark mode) -->
         <svg
           v-if="isDark"
-          class="h-5 w-5 text-yellow-400"
+          class="h-4 w-4 text-yellow-400 sm:h-5 sm:w-5"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -121,7 +139,7 @@ const getIconPath = (icon: string) => {
         <!-- Moon icon (shown in light mode) -->
         <svg
           v-else
-          class="h-5 w-5 text-foreground/70"
+          class="h-4 w-4 text-foreground/70 sm:h-5 sm:w-5"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
