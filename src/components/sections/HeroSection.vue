@@ -2,11 +2,23 @@
 import { AuroraBackground } from '@/components/ui/aurora-background'
 import { ShimmerButton } from '@/components/ui/shimmer-button'
 import { BoxReveal } from '@/components/ui/box-reveal'
+import { Marquee } from '@/components/ui/marquee'
 
 const scrollToSection = (sectionId: string) => {
   const element = document.getElementById(sectionId)
   element?.scrollIntoView({ behavior: 'smooth' })
 }
+
+const valueProps = [
+  'Scalable',
+  'High-Performance',
+  'Clean Code',
+  'User-Focused',
+  'SEO-Ready',
+  'Production-Ready',
+  'Well-Documented',
+  'Maintainable',
+]
 </script>
 
 <template>
@@ -21,20 +33,43 @@ const scrollToSection = (sectionId: string) => {
           </BoxReveal>
 
           <BoxReveal :duration="0.5" :delay="0.2">
-            <h1 class="text-5xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-6xl md:text-7xl lg:text-8xl">
-              Marcelo Toro
+            <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl md:text-6xl lg:text-7xl">
+              I build products that
             </h1>
           </BoxReveal>
 
+          <BoxReveal :duration="0.5" :delay="0.3">
+            <span class="bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl md:text-6xl lg:text-7xl">
+              deliver real impact
+            </span>
+          </BoxReveal>
+
           <BoxReveal :duration="0.5" :delay="0.4">
-            <p class="max-w-2xl text-lg text-neutral-700 dark:text-white/70 sm:text-xl">
-              Building scalable, high-performance web applications. 
-              Self-taught by conviction, passionate about clean code and collaborative teams.
+            <p class="mt-2 text-lg text-neutral-700 dark:text-white/70 sm:text-xl">
+              Hello, I'm <span class="font-semibold text-neutral-900 dark:text-white">Marcelo Toro</span>
             </p>
           </BoxReveal>
 
+          <!-- Value Propositions Marquee -->
           <BoxReveal :duration="0.5" :delay="0.5">
-            <div class="flex flex-wrap items-center justify-center gap-2 pt-2">
+            <div class="mt-2 w-full max-w-2xl overflow-hidden rounded-full border border-neutral-300 bg-neutral-100/50 backdrop-blur-sm dark:border-white/10 dark:bg-white/5">
+              <Marquee :pause-on-hover="false" class="py-2 [--duration:20s]">
+                <span
+                  v-for="prop in valueProps"
+                  :key="prop"
+                  class="mx-3 flex items-center gap-2 text-sm font-medium text-neutral-700 dark:text-white/80"
+                >
+                  <svg class="h-3 w-3 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                  </svg>
+                  {{ prop }}
+                </span>
+              </Marquee>
+            </div>
+          </BoxReveal>
+
+          <BoxReveal :duration="0.5" :delay="0.6">
+            <div class="mt-2 flex flex-wrap items-center justify-center gap-2">
               <span class="rounded-full bg-emerald-500/20 px-3 py-1 text-sm font-medium text-emerald-700 dark:text-emerald-300">
                 Open to Relocation to Europe
               </span>
@@ -44,7 +79,7 @@ const scrollToSection = (sectionId: string) => {
             </div>
           </BoxReveal>
 
-          <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+          <div class="mt-4 flex flex-wrap items-center justify-center gap-4">
             <ShimmerButton
               class="shadow-2xl"
               @click="scrollToSection('projects')"
