@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import ContactForm from '@/components/ui/ContactForm.vue'
+import { useI18n } from '@/composables/useI18n'
+
+const { t } = useI18n()
+
 const socialLinks = [
   {
     name: 'LinkedIn',
@@ -25,14 +30,6 @@ const socialLinks = [
     primary: false,
   },
 ]
-
-const availability = {
-  status: 'Available',
-  notice: '4-6 weeks',
-  locations: ['Spain', 'Ireland', 'Netherlands', 'Germany'],
-  visa: 'EU Blue Card eligible',
-  modes: ['Remote', 'Hybrid', 'On-site'],
-}
 </script>
 
 <template>
@@ -41,77 +38,24 @@ const availability = {
       <!-- Header -->
       <div class="mb-16 text-center">
         <h2 class="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-          Let's Work Together
+          {{ t('contact.title') }}
         </h2>
         <p class="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-          Senior Full Stack Developer looking for opportunities in Europe with visa sponsorship
+          {{ t('contact.subtitle') }}
         </p>
       </div>
 
       <!-- Main Grid -->
       <div class="grid gap-6 md:grid-cols-2">
         
-        <!-- Left: Availability Card -->
+        <!-- Left: Contact Form -->
         <div class="rounded-3xl border border-neutral-200 bg-gradient-to-br from-neutral-50 to-neutral-100 p-6 dark:border-white/10 dark:from-neutral-900 dark:to-neutral-800 sm:p-8">
-          <!-- Status Badge -->
-          <div class="mb-6 inline-flex items-center gap-2 rounded-full bg-emerald-500/20 px-4 py-2 ring-1 ring-emerald-500/30">
-            <span class="relative flex h-2.5 w-2.5">
-              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-              <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
-            </span>
-            <span class="text-sm font-medium text-emerald-600 dark:text-emerald-400">{{ availability.status }}</span>
-          </div>
-
-          <h3 class="mb-6 text-xl font-bold text-foreground">Availability Details</h3>
-
-          <div class="space-y-4">
-            <!-- Notice Period -->
-            <div class="flex items-center justify-between border-b border-neutral-200 pb-4 dark:border-white/10">
-              <span class="text-sm text-muted-foreground">Notice Period</span>
-              <span class="font-medium text-foreground">{{ availability.notice }}</span>
-            </div>
-
-            <!-- Target Locations -->
-            <div class="border-b border-neutral-200 pb-4 dark:border-white/10">
-              <span class="text-sm text-muted-foreground">Target Locations</span>
-              <div class="mt-2 flex flex-wrap gap-2">
-                <span 
-                  v-for="loc in availability.locations" 
-                  :key="loc"
-                  class="rounded-md bg-neutral-200/50 px-2.5 py-1 text-xs font-medium text-foreground ring-1 ring-neutral-300/50 dark:bg-white/5 dark:ring-white/10"
-                >
-                  {{ loc }}
-                </span>
-              </div>
-            </div>
-
-            <!-- Visa Status -->
-            <div class="flex items-center justify-between border-b border-neutral-200 pb-4 dark:border-white/10">
-              <span class="text-sm text-muted-foreground">Visa Status</span>
-              <span class="rounded-md bg-primary/20 px-2.5 py-1 text-xs font-medium text-primary ring-1 ring-primary/30">
-                {{ availability.visa }}
-              </span>
-            </div>
-
-            <!-- Work Mode -->
-            <div>
-              <span class="text-sm text-muted-foreground">Work Mode</span>
-              <div class="mt-2 flex flex-wrap gap-2">
-                <span 
-                  v-for="mode in availability.modes" 
-                  :key="mode"
-                  class="rounded-md bg-neutral-200/50 px-2.5 py-1 text-xs font-medium text-muted-foreground ring-1 ring-neutral-300/50 dark:bg-white/5 dark:ring-white/10"
-                >
-                  {{ mode }}
-                </span>
-              </div>
-            </div>
-          </div>
+          <ContactForm />
         </div>
 
         <!-- Right: Connect Card -->
         <div class="rounded-3xl border border-neutral-200 bg-gradient-to-br from-neutral-50 to-neutral-100 p-6 dark:border-white/10 dark:from-neutral-900 dark:to-neutral-800 sm:p-8">
-          <h3 class="mb-6 text-xl font-bold text-foreground">Get in Touch</h3>
+          <h3 class="mb-6 text-xl font-bold text-foreground">{{ t('contact.social.title') }}</h3>
           
           <div class="space-y-3">
             <a
@@ -154,10 +98,7 @@ const availability = {
             </a>
           </div>
 
-          <!-- Footer note -->
-          <p class="mt-6 text-center text-sm text-muted-foreground">
-            Prefer LinkedIn for professional inquiries
-          </p>
+
         </div>
       </div>
     </div>

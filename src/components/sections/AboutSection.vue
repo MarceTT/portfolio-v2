@@ -1,50 +1,50 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useI18n } from '@/composables/useI18n'
+import type { MetricItem, LanguageItem } from '@/i18n/es'
+
+const { t, tRaw } = useI18n()
 
 const avatarHovered = ref(false)
 
-const achievements = [
-  { 
-    value: '830K+', 
-    label: 'Emails Processed', 
-    description: 'High-volume email system with 94.61% delivery rate',
-    icon: 'mail',
-    color: 'from-blue-500/20 to-cyan-500/20'
-  },
-  { 
-    value: '40%', 
-    label: 'Faster Load Time', 
-    description: 'Performance boost with SSR + CloudFront CDN',
-    icon: 'bolt',
-    color: 'from-yellow-500/20 to-orange-500/20'
-  },
-  { 
-    value: '4x', 
-    label: 'API Speed Boost', 
-    description: 'Optimized from 800ms to 200ms response time',
-    icon: 'rocket',
-    color: 'from-purple-500/20 to-pink-500/20'
-  },
-  { 
-    value: '300%', 
-    label: 'Traffic Growth', 
-    description: 'Organic traffic increase via technical SEO',
-    icon: 'chart',
-    color: 'from-green-500/20 to-emerald-500/20'
-  },
+// Achievement icons and colors (fixed, not translated)
+const achievementStyles = [
+  { icon: 'mail', color: 'from-blue-500/20 to-cyan-500/20' },
+  { icon: 'bolt', color: 'from-yellow-500/20 to-orange-500/20' },
+  { icon: 'rocket', color: 'from-purple-500/20 to-pink-500/20' },
+  { icon: 'chart', color: 'from-green-500/20 to-emerald-500/20' },
 ]
 
-const internationalExp = [
-  { country: 'Chile', flag: '🇨🇱', role: 'Native' },
-  { country: 'New Zealand', flag: '🇳🇿', role: '1 year' },
-  { country: 'Canada', flag: '🇨🇦', role: '8 months' },
+// Get translated metrics
+const metricsItems = computed(() => tRaw<MetricItem[]>('about.metrics.items'))
+
+// Combine metrics with styles
+const achievements = computed(() => 
+  metricsItems.value.map((item, index) => ({
+    ...item,
+    icon: achievementStyles[index]?.icon || 'mail',
+    color: achievementStyles[index]?.color || 'from-blue-500/20 to-cyan-500/20',
+  }))
+)
+
+// Get translated language items
+const languageItems = computed(() => tRaw<LanguageItem[]>('about.languages.items'))
+
+// Language progress data (flags and percentages are fixed)
+const languageProgress = [
+  { flag: '🇪🇸', percent: 100 },
+  { flag: '🇬🇧', percent: 80 },
 ]
 
-const languages = [
-  { lang: 'Spanish', level: 'Native', flag: '🇪🇸', percent: 100 },
-  { lang: 'English', level: 'B1-B2', flag: '🇬🇧', percent: 70 },
-  { lang: 'Italian', level: 'A2', flag: '🇮🇹', percent: 30 },
-]
+// Combined languages with i18n
+const languages = computed(() => 
+  languageItems.value.map((item, index) => ({
+    lang: item.name,
+    level: item.level,
+    flag: languageProgress[index]?.flag || '🌐',
+    percent: languageProgress[index]?.percent || 50,
+  }))
+)
 
 const getIconPath = (icon: string) => {
   const icons: Record<string, string> = {
@@ -66,10 +66,10 @@ const getIconPath = (icon: string) => {
       <!-- Section Header -->
       <div class="mb-16 text-center">
         <h2 class="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-          About Me
+          {{ t('about.title') }}
         </h2>
         <p class="mt-4 text-lg text-muted-foreground">
-          10+ years solving complex problems with clean code
+          {{ t('about.subtitle') }}
         </p>
       </div>
 
@@ -115,11 +115,10 @@ const getIconPath = (icon: string) => {
                 Marcelo Toro
               </h3>
               <p class="mt-1 text-sm font-medium text-primary">
-                Senior Full Stack Developer
+                Software Development Consultant
               </p>
               <p class="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
-                Self-taught by conviction with <span class="text-foreground font-medium">10+ years of experience</span> building scalable, high-performance web applications. 
-                Passionate about solving complex problems, writing clean code, and collaborating with teams where everyone learns and grows together.
+                {{ t('about.bio') }}
               </p>
               
               <!-- Quick tech tags -->
@@ -136,34 +135,7 @@ const getIconPath = (icon: string) => {
           </div>
         </div>
 
-        <!-- International Experience Card - Spans 2 columns -->
-        <div 
-          class="group relative col-span-1 overflow-hidden rounded-3xl border border-neutral-200 bg-gradient-to-br from-neutral-50 to-neutral-100 p-6 transition-all duration-500 hover:border-neutral-300 hover:shadow-2xl hover:shadow-primary/5 dark:border-white/10 dark:from-neutral-900 dark:to-neutral-800 dark:hover:border-white/20 md:col-span-2"
-        >
-          <div class="mb-4 flex items-center gap-2">
-            <svg class="h-5 w-5 text-foreground/70" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" :d="getIconPath('globe')" />
-            </svg>
-            <h3 class="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-              International
-            </h3>
-          </div>
-          <div class="space-y-3">
-            <div 
-              v-for="exp in internationalExp" 
-              :key="exp.country"
-              class="flex items-center justify-between rounded-xl bg-neutral-200/50 px-3 py-2 transition-all hover:bg-neutral-200 dark:bg-white/5 dark:hover:bg-white/10"
-            >
-              <div class="flex items-center gap-3">
-                <span class="text-2xl">{{ exp.flag }}</span>
-                <span class="text-sm font-medium text-foreground">{{ exp.country }}</span>
-              </div>
-              <span class="text-xs text-muted-foreground">{{ exp.role }}</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Achievement Cards - 4 cards with better visual hierarchy -->
+        <!-- Achievement Cards - Client Results -->
         <div 
           v-for="(achievement, index) in achievements"
           :key="achievement.label"
@@ -190,10 +162,6 @@ const getIconPath = (icon: string) => {
             <div class="mt-2 text-sm font-semibold text-foreground">
               {{ achievement.label }}
             </div>
-            <!-- Description -->
-            <div class="mt-1 text-xs leading-relaxed text-muted-foreground">
-              {{ achievement.description }}
-            </div>
           </div>
         </div>
 
@@ -206,7 +174,7 @@ const getIconPath = (icon: string) => {
               <path stroke-linecap="round" stroke-linejoin="round" :d="getIconPath('chat')" />
             </svg>
             <h3 class="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-              Languages
+              {{ t('about.languages.title') }}
             </h3>
           </div>
           <div class="space-y-3">
@@ -228,35 +196,6 @@ const getIconPath = (icon: string) => {
                   :style="{ width: `${lang.percent}%` }"
                 />
               </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Open to Relocate Card -->
-        <div 
-          class="group relative col-span-1 overflow-hidden rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 via-neutral-50 to-neutral-100 p-6 transition-all duration-500 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10 dark:via-neutral-900 dark:to-neutral-800 md:col-span-2"
-        >
-          <!-- Animated gradient background -->
-          <div class="absolute inset-0 bg-gradient-to-r from-primary/10 via-purple-500/10 to-pink-500/10 opacity-50" />
-          
-          <div class="relative flex h-full flex-col justify-between">
-            <div>
-              <div class="mb-2 inline-flex items-center gap-2 rounded-full bg-primary/20 px-3 py-1 text-xs font-medium text-primary ring-1 ring-primary/30">
-                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" :d="getIconPath('plane')" />
-                </svg>
-                Open to Opportunities
-              </div>
-              <h3 class="mt-3 text-lg font-bold text-foreground sm:text-xl">
-                Looking to Relocate
-              </h3>
-              <p class="mt-2 text-sm text-muted-foreground">
-                Seeking opportunities in <span class="font-medium text-foreground">Spain</span> or the <span class="font-medium text-foreground">European Union</span> with visa sponsorship.
-              </p>
-            </div>
-            <div class="mt-4 flex items-center gap-2">
-              <span class="text-2xl">🇪🇺</span>
-              <span class="text-2xl">🇪🇸</span>
             </div>
           </div>
         </div>

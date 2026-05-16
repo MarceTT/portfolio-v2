@@ -1,0 +1,6 @@
+# Robots.txt for Marcelo Toro Portfolio
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://marcelo-toro-portfolio.netlify.app/sitemap.xml

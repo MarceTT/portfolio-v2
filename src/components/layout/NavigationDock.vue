@@ -2,8 +2,11 @@
 import { onMounted, ref, onUnmounted } from 'vue'
 import { Dock, DockIcon, DockSeparator } from '@/components/ui/dock'
 import { useTheme } from '@/composables/useTheme'
+import { useI18n } from '@/composables/useI18n'
+import LanguageToggle from '@/components/ui/LanguageToggle.vue'
 
 const { isDark, toggleTheme, initTheme } = useTheme()
+const { t } = useI18n()
 
 const isMobile = ref(false)
 
@@ -25,12 +28,13 @@ onUnmounted(() => {
 })
 
 const navItems = [
-  { icon: 'home', label: 'Home', href: '#hero', showMobile: true },
-  { icon: 'user', label: 'About', href: '#about', showMobile: false },
-  { icon: 'code', label: 'Skills', href: '#skills', showMobile: false },
-  { icon: 'folder', label: 'Projects', href: '#projects', showMobile: true },
-  { icon: 'briefcase', label: 'Experience', href: '#experience', showMobile: false },
-  { icon: 'mail', label: 'Contact', href: '#contact', showMobile: true },
+  { icon: 'home', labelKey: 'nav.home', href: '#hero', showMobile: true },
+  { icon: 'user', labelKey: 'nav.about', href: '#about', showMobile: false },
+  { icon: 'services', labelKey: 'services.title', href: '#services', showMobile: false },
+  { icon: 'code', labelKey: 'nav.skills', href: '#skills', showMobile: false },
+  { icon: 'folder', labelKey: 'nav.projects', href: '#projects', showMobile: true },
+  { icon: 'briefcase', labelKey: 'nav.experience', href: '#experience', showMobile: false },
+  { icon: 'mail', labelKey: 'nav.contact', href: '#contact', showMobile: true },
 ]
 
 const socialLinks = [
@@ -47,6 +51,7 @@ const getIconPath = (icon: string) => {
   const icons: Record<string, string> = {
     home: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
     user: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z',
+    services: 'M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z',
     code: 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4',
     folder: 'M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z',
     briefcase: 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
@@ -76,9 +81,9 @@ const filteredNavItems = () => {
       <!-- Navigation Items -->
       <DockIcon
         v-for="item in filteredNavItems()"
-        :key="item.label"
+        :key="item.labelKey"
         class="cursor-pointer rounded-full bg-transparent p-1.5 transition-colors hover:bg-muted sm:p-2.5"
-        :title="item.label"
+        :title="t(item.labelKey)"
         @click="scrollToSection(item.href)"
       >
         <svg
@@ -149,6 +154,13 @@ const filteredNavItems = () => {
         >
           <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
         </svg>
+      </DockIcon>
+
+      <DockSeparator />
+
+      <!-- Language Toggle -->
+      <DockIcon class="flex items-center justify-center p-0">
+        <LanguageToggle />
       </DockIcon>
     </Dock>
   </div>
