@@ -1,0 +1,153 @@
+<!doctype html>
+<!--
+  Source for public/images/og-image.png (1200x630).
+  Regenerate with:
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+      --headless --disable-gpu --hide-scrollbars \
+      --window-size=1200,630 \
+      --screenshot=public/images/og-image.png \
+      assets-src/og-image.html
+-->
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 1200px;
+        height: 630px;
+      }
+
+      body {
+        position: relative;
+        overflow: hidden;
+        background: #0a0a0a;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Subtle aurora glow, echoing the site's hero background */
+      .aurora {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(110px);
+      }
+
+      .aurora-blue {
+        width: 760px;
+        height: 420px;
+        left: -140px;
+        top: -170px;
+        background: rgba(59, 130, 246, 0.26);
+      }
+
+      .aurora-purple {
+        width: 680px;
+        height: 420px;
+        left: 380px;
+        top: -220px;
+        background: rgba(139, 92, 246, 0.22);
+      }
+
+      .aurora-pink {
+        width: 620px;
+        height: 400px;
+        right: -160px;
+        bottom: -210px;
+        background: rgba(236, 72, 153, 0.18);
+      }
+
+      /* Very faint grid, reads as texture rather than content */
+      .grid {
+        position: absolute;
+        inset: 0;
+        background-image: linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+        background-size: 64px 64px;
+        mask-image: radial-gradient(ellipse at center, #000 35%, transparent 78%);
+        -webkit-mask-image: radial-gradient(ellipse at center, #000 35%, transparent 78%);
+      }
+
+      .content {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        padding: 0 80px;
+      }
+
+      .mark {
+        width: 76px;
+        height: 76px;
+        margin: 0 auto 44px;
+        border-radius: 20px;
+        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 34px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        color: #fff;
+        box-shadow: 0 18px 60px rgba(99, 102, 241, 0.35);
+      }
+
+      .name {
+        font-size: 104px;
+        font-weight: 800;
+        letter-spacing: -3.5px;
+        line-height: 1;
+        color: #ffffff;
+      }
+
+      .tagline {
+        margin-top: 30px;
+        font-size: 42px;
+        font-weight: 700;
+        letter-spacing: -0.8px;
+        background: linear-gradient(90deg, #8b5cf6 0%, #3b82f6 48%, #ec4899 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .divider {
+        width: 128px;
+        height: 3px;
+        margin: 40px auto 0;
+        border-radius: 999px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+      }
+
+      .subtitle {
+        margin-top: 28px;
+        font-size: 25px;
+        font-weight: 500;
+        letter-spacing: 0.4px;
+        color: rgba(255, 255, 255, 0.62);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="aurora aurora-blue"></div>
+    <div class="aurora aurora-purple"></div>
+    <div class="aurora aurora-pink"></div>
+    <div class="grid"></div>
+
+    <div class="content">
+      <div class="mark">MT</div>
+      <h1 class="name">Marcelo Toro</h1>
+      <p class="tagline">Software &amp; Automatizaci&oacute;n</p>
+      <div class="divider"></div>
+      <p class="subtitle">Desarrollo a medida &nbsp;|&nbsp; Consultor&iacute;a t&eacute;cnica</p>
+    </div>
+  </body>
+</html>
