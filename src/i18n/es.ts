@@ -24,6 +24,13 @@ export type ServiceOption = {
   label: string
 }
 
+// Translatable copy for a skill category. `id` matches an entry in src/data/skills.ts,
+// which owns the non-translatable part (icon, colors, technology names).
+export type SkillCategoryCopy = {
+  id: string
+  title: string
+}
+
 export type TranslationSchema = {
   nav: {
     home: string
@@ -61,6 +68,11 @@ export type TranslationSchema = {
       items: LanguageItem[]
     }
   }
+  skills: {
+    title: string
+    subtitle: string
+    categories: SkillCategoryCopy[]
+  }
   projects: {
     title: string
     subtitle: string
@@ -68,8 +80,11 @@ export type TranslationSchema = {
     labels: {
       problem: string
       solution: string
-      results: string
+      metrics: string
+      highlights: string
       technologies: string
+      viewLive: string
+      viewGithub: string
     }
   }
   contact: {
@@ -198,16 +213,31 @@ export const es: TranslationSchema = {
     },
   },
 
+  // Skills Section
+  skills: {
+    title: 'Stack Tecnológico',
+    subtitle: 'Tecnologías con las que trabajo a diario',
+    categories: [
+      { id: 'frontend', title: 'Frontend' },
+      { id: 'backend', title: 'Backend' },
+      { id: 'database', title: 'Bases de Datos' },
+      { id: 'cloud', title: 'Cloud y DevOps' },
+    ],
+  },
+
   // Projects Section
   projects: {
     title: 'Casos de Éxito',
     subtitle: 'Resultados reales para clientes reales',
     viewMore: 'Ver más proyectos',
     labels: {
-      problem: 'Problema',
-      solution: 'Solución',
-      results: 'Resultados',
-      technologies: 'Tecnologías',
+      problem: 'El Problema',
+      solution: 'La Solución',
+      metrics: 'Métricas Clave',
+      highlights: 'Destacados',
+      technologies: 'Stack Tecnológico',
+      viewLive: 'Ver sitio en vivo',
+      viewGithub: 'Ver en GitHub',
     },
   },
 

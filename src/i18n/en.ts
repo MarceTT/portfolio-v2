@@ -91,16 +91,31 @@ export const en: TranslationSchema = {
     },
   },
 
+  // Skills Section
+  skills: {
+    title: 'Tech Stack',
+    subtitle: 'Technologies I work with daily',
+    categories: [
+      { id: 'frontend', title: 'Frontend' },
+      { id: 'backend', title: 'Backend' },
+      { id: 'database', title: 'Database' },
+      { id: 'cloud', title: 'Cloud & DevOps' },
+    ],
+  },
+
   // Projects Section
   projects: {
     title: 'Case Studies',
     subtitle: 'Real results for real clients',
     viewMore: 'See more projects',
     labels: {
-      problem: 'Problem',
-      solution: 'Solution',
-      results: 'Results',
-      technologies: 'Technologies',
+      problem: 'The Problem',
+      solution: 'The Solution',
+      metrics: 'Key Metrics',
+      highlights: 'Highlights',
+      technologies: 'Tech Stack',
+      viewLive: 'View Live Site',
+      viewGithub: 'View on GitHub',
     },
   },
 

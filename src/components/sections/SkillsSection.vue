@@ -1,62 +1,21 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { Marquee } from '@/components/ui/marquee'
+import { useI18n } from '@/composables/useI18n'
+import { frontendTech, backendTech, devopsTech, skillCategories } from '@/data/skills'
+import type { SkillCategoryCopy } from '@/i18n'
 
-// Tech icons con URLs de Simple Icons (CDN)
-const frontendTech = [
-  { name: 'React', icon: 'https://cdn.simpleicons.org/react/61DAFB', color: '#61DAFB' },
-  { name: 'Next.js', icon: 'https://cdn.simpleicons.org/nextdotjs/FFFFFF', color: '#FFFFFF' },
-  { name: 'TypeScript', icon: 'https://cdn.simpleicons.org/typescript/3178C6', color: '#3178C6' },
-  { name: 'JavaScript', icon: 'https://cdn.simpleicons.org/javascript/F7DF1E', color: '#F7DF1E' },
-  { name: 'Vue.js', icon: 'https://cdn.simpleicons.org/vuedotjs/4FC08D', color: '#4FC08D' },
-  { name: 'Tailwind CSS', icon: 'https://cdn.simpleicons.org/tailwindcss/06B6D4', color: '#06B6D4' },
-]
+const { t, tRaw } = useI18n()
 
-const backendTech = [
-  { name: 'Node.js', icon: 'https://cdn.simpleicons.org/nodedotjs/5FA04E', color: '#5FA04E' },
-  { name: 'NestJS', icon: 'https://cdn.simpleicons.org/nestjs/E0234E', color: '#E0234E' },
-  { name: 'Laravel', icon: 'https://cdn.simpleicons.org/laravel/FF2D20', color: '#FF2D20' },
-  { name: 'PHP', icon: 'https://cdn.simpleicons.org/php/777BB4', color: '#777BB4' },
-  { name: 'Express', icon: 'https://cdn.simpleicons.org/express/FFFFFF', color: '#FFFFFF' },
-  { name: 'PostgreSQL', icon: 'https://cdn.simpleicons.org/postgresql/4169E1', color: '#4169E1' },
-  { name: 'MongoDB', icon: 'https://cdn.simpleicons.org/mongodb/47A248', color: '#47A248' },
-  { name: 'Redis', icon: 'https://cdn.simpleicons.org/redis/DC382D', color: '#DC382D' },
-]
+// Join the non-translatable category data with its translated title
+const categories = computed(() => {
+  const copy = tRaw<SkillCategoryCopy[]>('skills.categories')
 
-const devopsTech = [
-  { name: 'AWS', icon: 'https://cdn.simpleicons.org/amazonwebservices/FF9900', color: '#FF9900' },
-  { name: 'Google Cloud', icon: 'https://cdn.simpleicons.org/googlecloud/4285F4', color: '#4285F4' },
-  { name: 'Docker', icon: 'https://cdn.simpleicons.org/docker/2496ED', color: '#2496ED' },
-  { name: 'GitHub Actions', icon: 'https://cdn.simpleicons.org/githubactions/2088FF', color: '#2088FF' },
-  { name: 'Git', icon: 'https://cdn.simpleicons.org/git/F05032', color: '#F05032' },
-  { name: 'MySQL', icon: 'https://cdn.simpleicons.org/mysql/4479A1', color: '#4479A1' },
-]
-
-const skillCategories = [
-  {
-    title: 'Frontend',
-    skills: ['React', 'Next.js 15', 'TypeScript', 'JavaScript', 'Vue.js', 'Tailwind CSS'],
-    icon: 'frontend',
-    color: 'bg-blue-500/20 text-blue-400',
-  },
-  {
-    title: 'Backend',
-    skills: ['Node.js', 'NestJS', 'Laravel', 'PHP', 'Express.js', 'REST APIs'],
-    icon: 'backend',
-    color: 'bg-green-500/20 text-green-400',
-  },
-  {
-    title: 'Database',
-    skills: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis'],
-    icon: 'database',
-    color: 'bg-purple-500/20 text-purple-400',
-  },
-  {
-    title: 'Cloud & DevOps',
-    skills: ['AWS (EC2, S3, CloudFront, RDS)', 'GCP (Cloud Run, Cloud SQL)', 'Docker', 'CI/CD', 'GitHub Actions'],
-    icon: 'cloud',
-    color: 'bg-orange-500/20 text-orange-400',
-  },
-]
+  return skillCategories.map((category) => ({
+    ...category,
+    title: copy.find((item) => item.id === category.id)?.title ?? category.id,
+  }))
+})
 
 const getIconPath = (icon: string) => {
   const icons: Record<string, string> = {
@@ -74,10 +33,10 @@ const getIconPath = (icon: string) => {
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mb-16 text-center">
         <h2 class="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-          Tech Stack
+          {{ t('skills.title') }}
         </h2>
         <p class="mt-4 text-lg text-muted-foreground">
-          Technologies I work with daily
+          {{ t('skills.subtitle') }}
         </p>
       </div>
 
@@ -127,8 +86,8 @@ const getIconPath = (icon: string) => {
       <!-- Skill Categories Grid -->
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <div
-          v-for="category in skillCategories"
-          :key="category.title"
+          v-for="category in categories"
+          :key="category.id"
           class="rounded-xl border border-border/50 bg-card/50 p-6 backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-card/80"
         >
           <div class="mb-4 flex items-center gap-3">
