@@ -15,7 +15,7 @@ const localizedExperiences = computed(() => {
 
   return experiences.map((experience) => {
     const text = copy.find((item) => item.id === experience.id)
-    const end = experience.end ? formatMonthYear(experience.end) : t('experience.present')
+    const end = experience.end ? formatMonthYear(experience.end) : t('common.present')
 
     return {
       ...experience,

@@ -1,125 +1,39 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { AppleCardCarousel, AppleCarouselItem, AppleCard } from '@/components/ui/apple-card-carousel'
 import { useI18n } from '@/composables/useI18n'
+import { projects } from '@/data/projects'
+import type { ProjectCopy } from '@/i18n'
 
-const { t } = useI18n()
+const { t, tRaw } = useI18n()
 
-// Proyectos con imágenes reales
-// NOTA: Reemplazá estas URLs con las URLs finales de tus imágenes
-const projects = [
-  {
-    id: 1,
-    card: {
-      src: '/images/projects/nurturing.png',
-      title: 'Nurturing CRM',
-      category: 'Email Marketing Platform',
-    },
-    description: 'Custom CRM platform with automated email marketing workflows and high-volume distributed processing for Defensoría del Deudor.',
-    problem: 'The client needed a system capable of sending massive email campaigns to hundreds of thousands of recipients with high deliverability and real-time analytics.',
-    solution: 'Architected a distributed system with 20 parallel workers, Redis queues, and intelligent circuit breakers to handle failures gracefully.',
-    metrics: [
-      { label: 'Emails/Campaign', value: '830,013' },
-      { label: 'Delivery Rate', value: '94.61%' },
-      { label: 'Open Rate', value: '14.82%' },
-      { label: 'Parallel Workers', value: '20' },
-    ],
-    highlights: [
-      'Distributed system processing 789,000+ emails per campaign',
-      'Idempotency system with Redis locks ensuring zero duplicate sends',
-      'Intelligent circuit breaker for SMTP provider failures',
-      'Auto-recovery system for stalled pipeline stages',
-      'Fixed browser OOM issues handling 350,000+ records',
-    ],
-    tech: ['Laravel 12', 'React 19', 'TypeScript', 'PostgreSQL', 'Redis', 'GCP', 'Docker', 'Zustand', 'TanStack Query'],
-    link: null,
-    github: 'https://github.com/MarceTT',
-    year: '2024 - Present',
-  },
-  {
-    id: 2,
-    card: {
-      src: '/images/projects/matchmycourse.png',
-      title: 'MatchMyCourse',
-      category: 'Educational Marketplace',
-    },
-    description: 'Full-stack educational marketplace connecting students with English courses in Ireland and New Zealand.',
-    problem: 'Students struggled to find and compare English language courses across different countries, schools, and price ranges.',
-    solution: 'Built an end-to-end platform with advanced search, filtering, and SEO optimization to help students discover the perfect course.',
-    metrics: [
-      { label: 'Monthly Users', value: '5,000+' },
-      { label: 'Uptime', value: '99.9%' },
-      { label: 'API Response', value: '<200ms' },
-      { label: 'Traffic Growth', value: '300%' },
-    ],
-    highlights: [
-      'Architected full platform from scratch with Next.js 15',
-      'Reduced page load time by 40% with SSR + CloudFront CDN',
-      'API response optimization from 800ms to 200ms',
-      'ISR implementation for 500+ school pages',
-      '95+ Lighthouse performance score',
-    ],
-    tech: ['Next.js 15', 'React', 'TypeScript', 'Node.js', 'MongoDB', 'AWS S3', 'CloudFront', 'Tailwind CSS'],
-    link: 'https://matchmycourse.com',
-    github: 'https://github.com/MarceTT',
-    year: '2025',
-  },
-  {
-    id: 3,
-    card: {
-      src: '/images/projects/back_office.png',
-      title: 'Cable Color Back Office',
-      category: 'Enterprise Management System',
-    },
-    description: 'Complete migration of legacy back office system to modern tech stack for a telecom company with 6 regional branches.',
-    problem: 'Legacy system was slow, difficult to maintain, and couldn\'t scale to support the growing sales team across multiple locations.',
-    solution: 'Led full migration to Laravel + React, implementing modern UI/UX patterns and real-time data synchronization.',
-    metrics: [
-      { label: 'Load Time', value: '-60%' },
-      { label: 'Productivity', value: '+40%' },
-      { label: 'Branches', value: '6' },
-      { label: 'Team Size', value: '4 devs' },
-    ],
-    highlights: [
-      'Reduced page load times by ~60%',
-      'Improved sales team productivity by ~40%',
-      'Custom APIs with JWT serving 6 branches real-time',
-      'Responsive dashboard for mobile field access',
-      'Led 4-developer team delivering on schedule',
-    ],
-    tech: ['Laravel 10', 'React 18', 'TypeScript', 'Redux', 'TanStack Query', 'MySQL', 'Tailwind CSS', 'JWT'],
-    link: null,
-    github: 'https://github.com/MarceTT',
-    year: '2024',
-  },
-  {
-    id: 4,
-    card: {
-      src: '/images/projects/pasajes.png',
-      title: 'Chile Pasajes',
-      category: 'Travel Booking Platform',
-    },
-    description: 'Bus ticket booking platform serving 2,000+ destinations across Chile and Argentina.',
-    problem: 'The platform needed modern backend architecture and improved performance to handle high traffic during peak travel seasons.',
-    solution: 'Developed advanced Laravel Nova features, implemented caching strategies, and built custom Vue.js tools for the admin panel.',
-    metrics: [
-      { label: 'Destinations', value: '2,000+' },
-      { label: 'Countries', value: '2' },
-      { label: 'Cache Hit', value: '95%' },
-      { label: 'Response', value: '<300ms' },
-    ],
-    highlights: [
-      'Advanced features with Laravel Nova 4',
-      'Custom Vue.js tools for admin panel',
-      'JWT, Laravel Spatie, Laravel Excel integrations',
-      'Redis caching for optimal performance',
-      'Database optimization with query caching',
-    ],
-    tech: ['Laravel 11', 'PHP 8.3', 'Vue.js', 'Laravel Nova', 'MySQL', 'Redis', 'Tailwind CSS'],
-    link: 'https://chilepasajes.cl',
-    github: 'https://github.com/MarceTT',
-    year: '2024',
-  },
-]
+// Join each case study with its translated copy; metric values stay in the data
+// module and only their labels are translated.
+const localizedProjects = computed(() => {
+  const copy = tRaw<ProjectCopy[]>('projects.items')
+
+  return projects.map((project) => {
+    const text = copy.find((item) => item.id === project.id)
+
+    return {
+      ...project,
+      card: {
+        src: project.image,
+        title: text?.title ?? project.id,
+        category: text?.category ?? '',
+      },
+      description: text?.description ?? '',
+      problem: text?.problem ?? '',
+      solution: text?.solution ?? '',
+      highlights: text?.highlights ?? [],
+      metrics: project.metrics.map((metric) => ({
+        ...metric,
+        label: text?.metrics.find((item) => item.id === metric.id)?.label ?? metric.id,
+      })),
+      displayYear: project.ongoing ? `${project.year} - ${t('common.present')}` : project.year,
+    }
+  })
+})
 </script>
 
 <template>
@@ -136,13 +50,13 @@ const projects = [
 
       <AppleCardCarousel>
         <AppleCarouselItem
-          v-for="(project, index) in projects"
+          v-for="(project, index) in localizedProjects"
           :key="project.id"
           :index="index"
         >
           <AppleCard
             :card="project.card"
-            :index="project.id"
+            :index="index"
           >
             <!-- Modal Content -->
             <div class="space-y-8">
@@ -152,7 +66,7 @@ const projects = [
                   {{ project.description }}
                 </p>
                 <span class="mt-2 inline-block rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
-                  {{ project.year }}
+                  {{ project.displayYear }}
                 </span>
               </div>
 
@@ -163,7 +77,7 @@ const projects = [
                     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                     </svg>
-                    The Problem
+                    {{ t('projects.labels.problem') }}
                   </h4>
                   <p class="text-sm text-red-600 dark:text-red-300">{{ project.problem }}</p>
                 </div>
@@ -172,7 +86,7 @@ const projects = [
                     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    The Solution
+                    {{ t('projects.labels.solution') }}
                   </h4>
                   <p class="text-sm text-green-600 dark:text-green-300">{{ project.solution }}</p>
                 </div>
@@ -180,11 +94,11 @@ const projects = [
 
               <!-- Metrics -->
               <div>
-                <h4 class="mb-4 font-semibold text-neutral-800 dark:text-neutral-200">Key Metrics</h4>
+                <h4 class="mb-4 font-semibold text-neutral-800 dark:text-neutral-200">{{ t('projects.labels.metrics') }}</h4>
                 <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
                   <div
                     v-for="metric in project.metrics"
-                    :key="metric.label"
+                    :key="metric.id"
                     class="rounded-xl border border-neutral-200 bg-white p-4 text-center dark:border-neutral-700 dark:bg-neutral-800"
                   >
                     <div class="text-2xl font-bold text-primary">{{ metric.value }}</div>
@@ -195,7 +109,7 @@ const projects = [
 
               <!-- Highlights -->
               <div>
-                <h4 class="mb-4 font-semibold text-neutral-800 dark:text-neutral-200">Highlights</h4>
+                <h4 class="mb-4 font-semibold text-neutral-800 dark:text-neutral-200">{{ t('projects.labels.highlights') }}</h4>
                 <ul class="space-y-2">
                   <li
                     v-for="highlight in project.highlights"
@@ -212,7 +126,7 @@ const projects = [
 
               <!-- Tech Stack -->
               <div>
-                <h4 class="mb-4 font-semibold text-neutral-800 dark:text-neutral-200">Tech Stack</h4>
+                <h4 class="mb-4 font-semibold text-neutral-800 dark:text-neutral-200">{{ t('projects.labels.technologies') }}</h4>
                 <div class="flex flex-wrap gap-2">
                   <span
                     v-for="tech in project.tech"
@@ -236,7 +150,7 @@ const projects = [
                   <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
-                  View Live Site
+                  {{ t('projects.labels.viewLive') }}
                 </a>
                 <a
                   :href="project.github"
@@ -247,7 +161,7 @@ const projects = [
                   <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                   </svg>
-                  View on GitHub
+                  {{ t('projects.labels.viewGithub') }}
                 </a>
               </div>
             </div>

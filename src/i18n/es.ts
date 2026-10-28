@@ -41,6 +41,19 @@ export type ExperienceCopy = {
   highlights: string[]
 }
 
+// Translatable copy for one case study. `id` matches an entry in
+// src/data/projects.ts, which owns the image, tech stack, links and metric values.
+export type ProjectCopy = {
+  id: string
+  title: string
+  category: string
+  description: string
+  problem: string
+  solution: string
+  metrics: { id: string; label: string }[]
+  highlights: string[]
+}
+
 export type TranslationSchema = {
   nav: {
     home: string
@@ -70,7 +83,6 @@ export type TranslationSchema = {
     subtitle: string
     bio: string
     metrics: {
-      title: string
       items: MetricItem[]
     }
     languages: {
@@ -86,7 +98,6 @@ export type TranslationSchema = {
   experience: {
     title: string
     subtitle: string
-    present: string
     international: string
     viewEarlier: string
     employment: Record<'fullTime' | 'contract' | 'freelance', string>
@@ -98,6 +109,7 @@ export type TranslationSchema = {
     title: string
     subtitle: string
     viewMore: string
+    items: ProjectCopy[]
     labels: {
       problem: string
       solution: string
@@ -133,14 +145,11 @@ export type TranslationSchema = {
     }
   }
   language: {
-    current: string
-    switchTo: string
     label: string
   }
   common: {
-    learnMore: string
-    viewAll: string
     close: string
+    present: string
   }
 }
 
@@ -217,7 +226,6 @@ export const es: TranslationSchema = {
     subtitle: 'Más de una década creando soluciones digitales',
     bio: 'Consultor de software con más de 10 años de experiencia construyendo soluciones escalables para clientes en LATAM y el mundo. Especializado en arquitectura frontend, automatizaciones y mentoría técnica.',
     metrics: {
-      title: 'Resultados para Clientes',
       items: [
         { value: '50+', label: 'Proyectos Entregados' },
         { value: '10+', label: 'Años de Experiencia' },
@@ -250,7 +258,6 @@ export const es: TranslationSchema = {
   experience: {
     title: 'Experiencia',
     subtitle: '+10 años construyendo aplicaciones web en 3 países',
-    present: 'Presente',
     international: 'Internacional',
     viewEarlier: 'Ver {count} posiciones anteriores',
     employment: {
@@ -377,6 +384,92 @@ export const es: TranslationSchema = {
     title: 'Casos de Éxito',
     subtitle: 'Resultados reales para clientes reales',
     viewMore: 'Ver más proyectos',
+    items: [
+      {
+        id: 'nurturing',
+        title: 'Nurturing CRM',
+        category: 'Plataforma de Email Marketing',
+        description: 'Plataforma CRM a medida con flujos automatizados de email marketing y procesamiento distribuido de alto volumen para Defensoría del Deudor.',
+        problem: 'El cliente necesitaba un sistema capaz de enviar campañas masivas de email a cientos de miles de destinatarios, con alta entregabilidad y analítica en tiempo real.',
+        solution: 'Diseñé un sistema distribuido con 20 workers paralelos, colas Redis y circuit breakers inteligentes para manejar fallas sin perder envíos.',
+        metrics: [
+          { id: 'emailsPerCampaign', label: 'Emails/Campaña' },
+          { id: 'deliveryRate', label: 'Tasa de Entrega' },
+          { id: 'openRate', label: 'Tasa de Apertura' },
+          { id: 'parallelWorkers', label: 'Workers Paralelos' },
+        ],
+        highlights: [
+          'Sistema distribuido que procesa más de 789.000 emails por campaña',
+          'Sistema de idempotencia con locks en Redis que garantiza cero envíos duplicados',
+          'Circuit breaker inteligente ante fallas del proveedor SMTP',
+          'Sistema de auto-recuperación para etapas detenidas del pipeline',
+          'Resolución de errores de memoria del navegador con más de 350.000 registros',
+        ],
+      },
+      {
+        id: 'match-my-course',
+        title: 'MatchMyCourse',
+        category: 'Marketplace Educativo',
+        description: 'Marketplace educativo full-stack que conecta estudiantes con cursos de inglés en Irlanda y Nueva Zelanda.',
+        problem: 'A los estudiantes les costaba encontrar y comparar cursos de inglés entre distintos países, escuelas y rangos de precio.',
+        solution: 'Construí una plataforma de punta a punta con búsqueda avanzada, filtros y optimización SEO para que cada estudiante encuentre el curso indicado.',
+        metrics: [
+          { id: 'monthlyUsers', label: 'Usuarios Mensuales' },
+          { id: 'uptime', label: 'Disponibilidad' },
+          { id: 'apiResponse', label: 'Respuesta API' },
+          { id: 'trafficGrowth', label: 'Crecimiento de Tráfico' },
+        ],
+        highlights: [
+          'Arquitectura completa de la plataforma desde cero con Next.js 15',
+          'Reducción del tiempo de carga en 40% con SSR + CDN de CloudFront',
+          'Optimización de la API de 800ms a 200ms',
+          'Implementación de ISR para más de 500 páginas de escuelas',
+          'Score de performance Lighthouse 95+',
+        ],
+      },
+      {
+        id: 'cable-color-back-office',
+        title: 'Cable Color Back Office',
+        category: 'Sistema de Gestión Empresarial',
+        description: 'Migración completa de un back office legado a un stack moderno para una empresa de telecomunicaciones con 6 sucursales regionales.',
+        problem: 'El sistema legado era lento, difícil de mantener y no escalaba para soportar al equipo comercial en crecimiento distribuido en varias ubicaciones.',
+        solution: 'Lideré la migración completa a Laravel + React, con patrones modernos de UI/UX y sincronización de datos en tiempo real.',
+        metrics: [
+          { id: 'loadTime', label: 'Tiempo de Carga' },
+          { id: 'productivity', label: 'Productividad' },
+          { id: 'branches', label: 'Sucursales' },
+          { id: 'teamSize', label: 'Desarrolladores' },
+        ],
+        highlights: [
+          'Reducción de los tiempos de carga en ~60%',
+          'Mejora de la productividad del equipo comercial en ~40%',
+          'APIs a medida con JWT sirviendo a 6 sucursales en tiempo real',
+          'Dashboard responsivo para acceso móvil en terreno',
+          'Lideré un equipo de 4 desarrolladores entregando en plazo',
+        ],
+      },
+      {
+        id: 'chile-pasajes',
+        title: 'Chile Pasajes',
+        category: 'Plataforma de Reservas de Viajes',
+        description: 'Plataforma de venta de pasajes de bus con más de 2.000 destinos en Chile y Argentina.',
+        problem: 'La plataforma necesitaba una arquitectura backend moderna y mejor performance para soportar el tráfico de las temporadas altas de viaje.',
+        solution: 'Desarrollé funcionalidades avanzadas en Laravel Nova, implementé estrategias de caché y construí herramientas Vue.js a medida para el panel de administración.',
+        metrics: [
+          { id: 'destinations', label: 'Destinos' },
+          { id: 'countries', label: 'Países' },
+          { id: 'cacheHit', label: 'Aciertos de Caché' },
+          { id: 'response', label: 'Respuesta' },
+        ],
+        highlights: [
+          'Funcionalidades avanzadas con Laravel Nova 4',
+          'Herramientas Vue.js a medida para el panel de administración',
+          'Integraciones de JWT, Laravel Spatie y Laravel Excel',
+          'Caché con Redis para performance óptima',
+          'Optimización de base de datos con caché de queries',
+        ],
+      },
+    ],
     labels: {
       problem: 'El Problema',
       solution: 'La Solución',
@@ -421,15 +514,12 @@ export const es: TranslationSchema = {
 
   // Language Toggle
   language: {
-    current: 'ES',
-    switchTo: 'EN',
     label: 'Cambiar a Inglés',
   },
 
   // Common
   common: {
-    learnMore: 'Saber más',
-    viewAll: 'Ver todo',
     close: 'Cerrar',
+    present: 'Presente',
   },
 }

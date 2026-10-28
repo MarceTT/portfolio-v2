@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref, computed, watchEffect } from 'vue'
 import { translations, defaultLocale, getNestedValue, type Locale, type TranslationSchema } from '@/i18n'
 
 const STORAGE_KEY = 'portfolio-locale'
@@ -31,6 +31,14 @@ const locale = ref<Locale>(getInitialLocale())
 
 // Current translations based on locale
 const currentTranslations = computed<TranslationSchema>(() => translations[locale.value])
+
+// Keep the document language in sync so assistive technology and search engines
+// see the locale the visitor is actually reading.
+watchEffect(() => {
+  if (typeof document !== 'undefined') {
+    document.documentElement.lang = locale.value
+  }
+})
 
 /**
  * Get translation by key path (e.g., 'hero.title')
