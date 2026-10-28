@@ -40,10 +40,12 @@ consulting framing, and the Services / i18n / contact-form features.
 
 | ID | Specs | Route | Commit |
 |----|-------|-------|--------|
-| T1 | S1 | inline — generate assets with headless Chrome, verify dimensions | |
-| T2 | S2 | inline — extend TranslationSchema + es/en, refactor 3 sections | |
-| T3 | S3, S4 | inline — dead key and log cleanup | |
-| T4 | S5 | inline — locale side effect in useI18n | |
+| T1 | S1 | inline — generate assets with headless Chrome, verify dimensions | 86d3636 |
+| T2a | S2 | inline — skills section | 9025501 |
+| T2b | S2 | inline — experience section | c5d6f63 |
+| T2c | S2 | inline — projects section | dfdbf5f |
+| T3 | S3, S4 | inline — dead key and log cleanup | dfdbf5f |
+| T4 | S5 | inline — locale side effect in useI18n | dfdbf5f |
 | T5 | S7 | inline — README rewrite | |
 | T6 | S6 | inline — pending routing decision | |
 
@@ -59,5 +61,22 @@ after all three are green.
 L3. Tooling: no rsvg/imagemagick/sharp available. Headless Chrome
 (`/Applications/Google Chrome.app`) is used to rasterize SVG/HTML to PNG.
 
-L4. S6 has a real architectural fork (SPA with query param vs vue-router + prerender)
+L4. Delivery strategy: T2 is split into one commit per section (T2a/T2b/T2c), each a
+self-contained reviewable unit (data module + translations + component). The branch
+carries several ~200-400 line slices rather than one oversized commit.
+
+L5. Experience refactor decisions: periods become ISO `start`/`end` fields formatted
+with `Intl.DateTimeFormat` per locale (one source of truth, admin-friendly) instead of
+hardcoded English strings. `type` becomes `employment` + `workMode` keys. The work mode
+that was duplicated inside `location` (e.g. "Chile · Remote") is dropped from the
+location string, since the same information already renders in the type line.
+
+L6. S6 has a real architectural fork (SPA with query param vs vue-router + prerender)
 and it interacts with the future admin, so T6 stops for a user decision.
+
+L7. Verification for T2-T4: production build plus `--dump-dom` renders of the built
+site under `--lang=es-CL` and `--lang=en-US`. Both locales render their own copy for
+skills, experience and projects, `<html lang>` follows the locale, the period line
+renders "Nov 2025 - Presente" / "Nov 2025 - Present", and the theme console.log is
+absent from the built bundle. Project modal labels were checked in the bundle, since
+the modal is not in the initial DOM.
