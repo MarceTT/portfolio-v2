@@ -6,6 +6,7 @@ import {
   type LanguageItem,
   type ServiceOption,
   type SkillCategoryCopy,
+  type ExperienceCopy,
 } from './es'
 import { en } from './en'
 
@@ -18,6 +19,7 @@ export type {
   LanguageItem,
   ServiceOption,
   SkillCategoryCopy,
+  ExperienceCopy,
 }
 
 export const translations: Record<Locale, TranslationSchema> = {

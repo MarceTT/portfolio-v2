@@ -103,6 +103,132 @@ export const en: TranslationSchema = {
     ],
   },
 
+  // Experience Section
+  experience: {
+    title: 'Experience',
+    subtitle: '10+ years building web applications across 3 countries',
+    present: 'Present',
+    international: 'International',
+    viewEarlier: 'View {count} earlier positions',
+    employment: {
+      fullTime: 'Full-time',
+      contract: 'Contract',
+      freelance: 'Freelance',
+    },
+    workMode: {
+      onSite: 'On-site',
+      remote: 'Remote',
+      hybrid: 'Hybrid',
+    },
+    items: [
+      {
+        id: 'defensoria-del-deudor',
+        title: 'Senior Full Stack Developer',
+        location: 'Santiago, Chile',
+        description: 'Leading development of “Nurturing” — a custom CRM platform with automated email marketing workflows and high-volume distributed processing.',
+        highlights: [
+          'Architected distributed system processing 789,000+ emails per campaign with 96% delivery rate',
+          'Implemented 20 parallel workers with Redis queues for better throughput',
+          'Built idempotency system with distributed Redis locks ensuring zero duplicate sends',
+          'Fixed browser OOM issues on listings with 350,000+ records',
+        ],
+      },
+      {
+        id: 'match-my-course',
+        title: 'Senior Full Stack Developer',
+        location: 'Chile',
+        description: 'Built end-to-end an educational marketplace connecting students with English courses in Ireland and New Zealand.',
+        highlights: [
+          'Architected full platform from scratch serving 5,000+ monthly users',
+          'Reduced page load time by 40% with SSR + CloudFront CDN',
+          'Optimized API response time from 800ms to 200ms',
+          'Achieved 300% increase in organic traffic through technical SEO',
+          'Implemented ISR for 500+ school pages with 95+ Lighthouse score',
+        ],
+      },
+      {
+        id: 'cable-color',
+        title: 'Senior Full Stack Developer',
+        location: 'Ovalle, Chile',
+        description: 'Led full migration of legacy back office system for 10+ sales reps across 6 regional branches.',
+        highlights: [
+          'Reduced page load times by ~60% migrating to Laravel 10 + React 18',
+          'Improved sales team productivity, reducing time-to-task by ~40%',
+          'Built custom APIs with JWT authentication serving 6 branches real-time',
+          'Led 4-developer team delivering migration on schedule',
+        ],
+      },
+      {
+        id: 'chile-pasajes',
+        title: 'Full Stack Developer',
+        location: 'Santiago, Chile',
+        description: 'Backend systems with Laravel 11, Laravel Nova 4, and modern frontend with Vue.js.',
+        highlights: [
+          'Developed advanced features with Laravel Nova 4 + custom Vue.js tools',
+          'Implemented JWT, Laravel Spatie, Laravel Excel integrations',
+          'Optimized performance with Redis and Laravel query caching',
+        ],
+      },
+      {
+        id: 'dividing-zero',
+        title: 'Full Stack Developer',
+        location: 'Auckland, New Zealand',
+        description: 'Maintained and updated NZVenues platform (nzvenues.co.nz).',
+        highlights: [
+          'Ensured platform remained functional, secure, and up-to-date',
+          'Delivered responsive web applications with Laravel 6 + Vue.js 2',
+        ],
+      },
+      {
+        id: 'universidad-del-alba',
+        title: 'IT Project Manager → Full Stack Developer',
+        location: 'Santiago, Chile',
+        description: 'Progressed from Full Stack Developer to IT Project Manager, leading university projects.',
+        highlights: [
+          'Directed IT projects ensuring adherence to budgets and timelines',
+          'Developed custom solutions for faculties using Laravel 5.5-8 + Angular 8',
+          'Managed project proposals, technology selection, and team coordination',
+          'Provided technical support during new technology implementations',
+        ],
+      },
+      {
+        id: 'americas-car-group',
+        title: 'Web Developer',
+        location: 'Santiago, Chile',
+        description: 'Analysis and development of requirements for corporation managers.',
+        highlights: [
+          'Database analysis, modeling and maintenance with PostgreSQL',
+          'Developed systems using Laravel 5.5-5.6 + Bootstrap',
+        ],
+      },
+      {
+        id: 'mas-cerca',
+        title: 'Web Developer',
+        location: 'Santiago, Chile',
+        description: 'Internal systems development for call center operations.',
+        highlights: [
+          'Built reporting dashboards and data analysis tools',
+          'Implemented OOP backend solutions',
+        ],
+      },
+      {
+        id: 'nuestragencia',
+        title: 'Junior Web Developer',
+        location: 'Santiago, Chile',
+        description: 'Web development for client projects at a digital agency.',
+        highlights: [
+          'Developed and maintained web applications',
+          'Gained foundational full-stack development experience',
+        ],
+      },
+    ],
+    summary: [
+      { value: '10+', label: 'Years Experience' },
+      { value: '3', label: 'Countries Worked' },
+      { value: '9', label: 'Companies' },
+    ],
+  },
+
   // Projects Section
   projects: {
     title: 'Case Studies',
