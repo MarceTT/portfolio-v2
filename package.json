@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build",
+    "sync:content": "node scripts/sync-content.mjs",
+    "test:sync": "node scripts/test-sync-content.mjs",
+    "build": "npm run sync:content && vue-tsc -b && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
