@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useI18n } from '@/composables/useI18n'
-import type { MetricItem, LanguageItem } from '@/i18n/es'
+import type { MetricItem, LanguageItem } from '@/i18n'
 
 const { t, tRaw } = useI18n()
 

@@ -2,7 +2,7 @@
 import { CardSpotlight } from '@/components/ui/card-spotlight'
 import { BoxReveal } from '@/components/ui/box-reveal'
 import { useI18n } from '@/composables/useI18n'
-import type { ServiceItem } from '@/i18n/es'
+import type { ServiceItem } from '@/i18n'
 
 const { t, tRaw } = useI18n()
 

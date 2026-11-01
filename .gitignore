@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# prerender scratch profiles
+dist/.locale-test-profile*
+dist/.prerender-profile
+
+# puppeteer chromium (downloaded during the build)
+.cache/

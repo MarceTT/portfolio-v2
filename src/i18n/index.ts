@@ -1,9 +1,18 @@
-import { es, type TranslationSchema, type ServiceItem, type MetricItem, type LanguageItem, type ServiceOption } from './es'
+import { es } from './es'
 import { en } from './en'
+import type { Locale, TranslationSchema } from './types'
 
-export type Locale = 'es' | 'en'
-
-export type { TranslationSchema, ServiceItem, MetricItem, LanguageItem, ServiceOption }
+export type {
+  Locale,
+  TranslationSchema,
+  ServiceItem,
+  MetricItem,
+  LanguageItem,
+  ServiceOption,
+  SkillCategoryCopy,
+  ExperienceCopy,
+  ProjectCopy,
+} from './types'
 
 export const translations: Record<Locale, TranslationSchema> = {
   es,

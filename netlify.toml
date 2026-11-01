@@ -1,0 +1,62 @@
+# Netlify configuration.
+#
+# Keeping this in the repository means the build command cannot drift out of sync
+# with the scripts: `npm run build` pulls the content, type-checks, compiles and
+# prerenders both locales, in that order.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+  # Prerendering needs a browser, and the build server has none. Puppeteer's
+  # Chromium is downloaded here, inside the repository, because Netlify caches that
+  # between builds; its default location in the home directory is not cached and
+  # would be fetched again on every deploy.
+  PUPPETEER_CACHE_DIR = "/opt/build/repo/.cache/puppeteer"
+
+# Reading the content at build time needs the secret key, which bypasses row level
+# security. Set SUPABASE_URL and SUPABASE_SECRET_KEY in the Netlify UI, never here.
+# If they are missing the build still succeeds with the committed snapshot.
+
+# /en without the trailing slash is the same page, not a second URL for it.
+[[redirects]]
+  from = "/en"
+  to = "/en/"
+  status = 301
+  force = true
+
+# Send a first-time English speaker to the English page.
+#
+# A 302, not a 301: the Spanish page is not permanently moved, and each locale keeps
+# its own canonical URL plus reciprocal hreflang, so both stay indexable. Crawlers
+# that do not express a language preference are left on the Spanish page.
+#
+# Remove this block if you would rather everyone land on Spanish.
+[[redirects]]
+  from = "/"
+  to = "/en/"
+  status = 302
+  force = false
+  conditions = {Language = ["en"]}
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    # Hashed filenames, so a year is safe and a repeat visit costs nothing.
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    # The documents themselves must be revalidated, or a publish would not be seen.
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"

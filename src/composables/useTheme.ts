@@ -20,7 +20,6 @@ const applyTheme = () => {
     } else {
       document.documentElement.classList.remove('dark')
     }
-    console.log('Theme applied:', isDark.value ? 'dark' : 'light', '| HTML class:', document.documentElement.className)
   }
 }
 

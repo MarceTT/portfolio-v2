@@ -1,0 +1,1679 @@
+{
+  "projects": [
+    {
+      "slug": "nurturing",
+      "image_path": "nurturing.png",
+      "link": null,
+      "github": "https://github.com/MarceTT",
+      "year": "2024",
+      "ongoing": true,
+      "tech": [
+        "Laravel 12",
+        "React 19",
+        "TypeScript",
+        "PostgreSQL",
+        "Redis",
+        "GCP",
+        "Docker",
+        "Zustand",
+        "TanStack Query"
+      ],
+      "metrics": [
+        {
+          "id": "emailsPerCampaign",
+          "value": "830,013"
+        },
+        {
+          "id": "deliveryRate",
+          "value": "94.61%"
+        },
+        {
+          "id": "openRate",
+          "value": "14.82%"
+        },
+        {
+          "id": "parallelWorkers",
+          "value": "20"
+        }
+      ],
+      "position": 0,
+      "published": true,
+      "translations": {
+        "es": {
+          "title": "Nurturing CRM",
+          "category": "Plataforma de Email Marketing",
+          "description": "Plataforma CRM a medida con flujos automatizados de email marketing y procesamiento distribuido de alto volumen para Defensoría del Deudor.",
+          "problem": "El cliente necesitaba un sistema capaz de enviar campañas masivas de email a cientos de miles de destinatarios, con alta entregabilidad y analítica en tiempo real.",
+          "solution": "Diseñé un sistema distribuido con 20 workers paralelos, colas Redis y circuit breakers inteligentes para manejar fallas sin perder envíos.",
+          "metrics": [
+            {
+              "id": "emailsPerCampaign",
+              "label": "Emails/Campaña"
+            },
+            {
+              "id": "deliveryRate",
+              "label": "Tasa de Entrega"
+            },
+            {
+              "id": "openRate",
+              "label": "Tasa de Apertura"
+            },
+            {
+              "id": "parallelWorkers",
+              "label": "Workers Paralelos"
+            }
+          ],
+          "highlights": [
+            "Sistema distribuido que procesa más de 789.000 emails por campaña",
+            "Sistema de idempotencia con locks en Redis que garantiza cero envíos duplicados",
+            "Circuit breaker inteligente ante fallas del proveedor SMTP",
+            "Sistema de auto-recuperación para etapas detenidas del pipeline",
+            "Resolución de errores de memoria del navegador con más de 350.000 registros"
+          ]
+        },
+        "en": {
+          "title": "Nurturing CRM",
+          "category": "Email Marketing Platform",
+          "description": "Custom CRM platform with automated email marketing workflows and high-volume distributed processing for Defensoría del Deudor.",
+          "problem": "The client needed a system capable of sending massive email campaigns to hundreds of thousands of recipients with high deliverability and real-time analytics.",
+          "solution": "Architected a distributed system with 20 parallel workers, Redis queues, and intelligent circuit breakers to handle failures gracefully.",
+          "metrics": [
+            {
+              "id": "emailsPerCampaign",
+              "label": "Emails/Campaign"
+            },
+            {
+              "id": "deliveryRate",
+              "label": "Delivery Rate"
+            },
+            {
+              "id": "openRate",
+              "label": "Open Rate"
+            },
+            {
+              "id": "parallelWorkers",
+              "label": "Parallel Workers"
+            }
+          ],
+          "highlights": [
+            "Distributed system processing 789,000+ emails per campaign",
+            "Idempotency system with Redis locks ensuring zero duplicate sends",
+            "Intelligent circuit breaker for SMTP provider failures",
+            "Auto-recovery system for stalled pipeline stages",
+            "Fixed browser OOM issues handling 350,000+ records"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "match-my-course",
+      "image_path": "matchmycourse.png",
+      "link": "https://matchmycourse.com",
+      "github": "https://github.com/MarceTT",
+      "year": "2025",
+      "ongoing": false,
+      "tech": [
+        "Next.js 15",
+        "React",
+        "TypeScript",
+        "Node.js",
+        "MongoDB",
+        "AWS S3",
+        "CloudFront",
+        "Tailwind CSS"
+      ],
+      "metrics": [
+        {
+          "id": "monthlyUsers",
+          "value": "5,000+"
+        },
+        {
+          "id": "uptime",
+          "value": "99.9%"
+        },
+        {
+          "id": "apiResponse",
+          "value": "<200ms"
+        },
+        {
+          "id": "trafficGrowth",
+          "value": "300%"
+        }
+      ],
+      "position": 1,
+      "published": true,
+      "translations": {
+        "es": {
+          "title": "MatchMyCourse",
+          "category": "Marketplace Educativo",
+          "description": "Marketplace educativo full-stack que conecta estudiantes con cursos de inglés en Irlanda y Nueva Zelanda.",
+          "problem": "A los estudiantes les costaba encontrar y comparar cursos de inglés entre distintos países, escuelas y rangos de precio.",
+          "solution": "Construí una plataforma de punta a punta con búsqueda avanzada, filtros y optimización SEO para que cada estudiante encuentre el curso indicado.",
+          "metrics": [
+            {
+              "id": "monthlyUsers",
+              "label": "Usuarios Mensuales"
+            },
+            {
+              "id": "uptime",
+              "label": "Disponibilidad"
+            },
+            {
+              "id": "apiResponse",
+              "label": "Respuesta API"
+            },
+            {
+              "id": "trafficGrowth",
+              "label": "Crecimiento de Tráfico"
+            }
+          ],
+          "highlights": [
+            "Arquitectura completa de la plataforma desde cero con Next.js 15",
+            "Reducción del tiempo de carga en 40% con SSR + CDN de CloudFront",
+            "Optimización de la API de 800ms a 200ms",
+            "Implementación de ISR para más de 500 páginas de escuelas",
+            "Score de performance Lighthouse 95+"
+          ]
+        },
+        "en": {
+          "title": "MatchMyCourse",
+          "category": "Educational Marketplace",
+          "description": "Full-stack educational marketplace connecting students with English courses in Ireland and New Zealand.",
+          "problem": "Students struggled to find and compare English language courses across different countries, schools, and price ranges.",
+          "solution": "Built an end-to-end platform with advanced search, filtering, and SEO optimization to help students discover the perfect course.",
+          "metrics": [
+            {
+              "id": "monthlyUsers",
+              "label": "Monthly Users"
+            },
+            {
+              "id": "uptime",
+              "label": "Uptime"
+            },
+            {
+              "id": "apiResponse",
+              "label": "API Response"
+            },
+            {
+              "id": "trafficGrowth",
+              "label": "Traffic Growth"
+            }
+          ],
+          "highlights": [
+            "Architected full platform from scratch with Next.js 15",
+            "Reduced page load time by 40% with SSR + CloudFront CDN",
+            "API response optimization from 800ms to 200ms",
+            "ISR implementation for 500+ school pages",
+            "95+ Lighthouse performance score"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "cable-color-back-office",
+      "image_path": "back_office.png",
+      "link": null,
+      "github": "https://github.com/MarceTT",
+      "year": "2024",
+      "ongoing": false,
+      "tech": [
+        "Laravel 10",
+        "React 18",
+        "TypeScript",
+        "Redux",
+        "TanStack Query",
+        "MySQL",
+        "Tailwind CSS",
+        "JWT"
+      ],
+      "metrics": [
+        {
+          "id": "loadTime",
+          "value": "-60%"
+        },
+        {
+          "id": "productivity",
+          "value": "+40%"
+        },
+        {
+          "id": "branches",
+          "value": "6"
+        },
+        {
+          "id": "teamSize",
+          "value": "4"
+        }
+      ],
+      "position": 2,
+      "published": true,
+      "translations": {
+        "es": {
+          "title": "Cable Color Back Office",
+          "category": "Sistema de Gestión Empresarial",
+          "description": "Migración completa de un back office legado a un stack moderno para una empresa de telecomunicaciones con 6 sucursales regionales.",
+          "problem": "El sistema legado era lento, difícil de mantener y no escalaba para soportar al equipo comercial en crecimiento distribuido en varias ubicaciones.",
+          "solution": "Lideré la migración completa a Laravel + React, con patrones modernos de UI/UX y sincronización de datos en tiempo real.",
+          "metrics": [
+            {
+              "id": "loadTime",
+              "label": "Tiempo de Carga"
+            },
+            {
+              "id": "productivity",
+              "label": "Productividad"
+            },
+            {
+              "id": "branches",
+              "label": "Sucursales"
+            },
+            {
+              "id": "teamSize",
+              "label": "Desarrolladores"
+            }
+          ],
+          "highlights": [
+            "Reducción de los tiempos de carga en ~60%",
+            "Mejora de la productividad del equipo comercial en ~40%",
+            "APIs a medida con JWT sirviendo a 6 sucursales en tiempo real",
+            "Dashboard responsivo para acceso móvil en terreno",
+            "Lideré un equipo de 4 desarrolladores entregando en plazo"
+          ]
+        },
+        "en": {
+          "title": "Cable Color Back Office",
+          "category": "Enterprise Management System",
+          "description": "Complete migration of legacy back office system to modern tech stack for a telecom company with 6 regional branches.",
+          "problem": "Legacy system was slow, difficult to maintain, and couldn't scale to support the growing sales team across multiple locations.",
+          "solution": "Led full migration to Laravel + React, implementing modern UI/UX patterns and real-time data synchronization.",
+          "metrics": [
+            {
+              "id": "loadTime",
+              "label": "Load Time"
+            },
+            {
+              "id": "productivity",
+              "label": "Productivity"
+            },
+            {
+              "id": "branches",
+              "label": "Branches"
+            },
+            {
+              "id": "teamSize",
+              "label": "Developers"
+            }
+          ],
+          "highlights": [
+            "Reduced page load times by ~60%",
+            "Improved sales team productivity by ~40%",
+            "Custom APIs with JWT serving 6 branches real-time",
+            "Responsive dashboard for mobile field access",
+            "Led 4-developer team delivering on schedule"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "chile-pasajes",
+      "image_path": "pasajes.png",
+      "link": "https://chilepasajes.cl",
+      "github": "https://github.com/MarceTT",
+      "year": "2024",
+      "ongoing": false,
+      "tech": [
+        "Laravel 11",
+        "PHP 8.3",
+        "Vue.js",
+        "Laravel Nova",
+        "MySQL",
+        "Redis",
+        "Tailwind CSS"
+      ],
+      "metrics": [
+        {
+          "id": "destinations",
+          "value": "2,000+"
+        },
+        {
+          "id": "countries",
+          "value": "2"
+        },
+        {
+          "id": "cacheHit",
+          "value": "95%"
+        },
+        {
+          "id": "response",
+          "value": "<300ms"
+        }
+      ],
+      "position": 3,
+      "published": true,
+      "translations": {
+        "es": {
+          "title": "Chile Pasajes",
+          "category": "Plataforma de Reservas de Viajes",
+          "description": "Plataforma de venta de pasajes de bus con más de 2.000 destinos en Chile y Argentina.",
+          "problem": "La plataforma necesitaba una arquitectura backend moderna y mejor performance para soportar el tráfico de las temporadas altas de viaje.",
+          "solution": "Desarrollé funcionalidades avanzadas en Laravel Nova, implementé estrategias de caché y construí herramientas Vue.js a medida para el panel de administración.",
+          "metrics": [
+            {
+              "id": "destinations",
+              "label": "Destinos"
+            },
+            {
+              "id": "countries",
+              "label": "Países"
+            },
+            {
+              "id": "cacheHit",
+              "label": "Aciertos de Caché"
+            },
+            {
+              "id": "response",
+              "label": "Respuesta"
+            }
+          ],
+          "highlights": [
+            "Funcionalidades avanzadas con Laravel Nova 4",
+            "Herramientas Vue.js a medida para el panel de administración",
+            "Integraciones de JWT, Laravel Spatie y Laravel Excel",
+            "Caché con Redis para performance óptima",
+            "Optimización de base de datos con caché de queries"
+          ]
+        },
+        "en": {
+          "title": "Chile Pasajes",
+          "category": "Travel Booking Platform",
+          "description": "Bus ticket booking platform serving 2,000+ destinations across Chile and Argentina.",
+          "problem": "The platform needed modern backend architecture and improved performance to handle high traffic during peak travel seasons.",
+          "solution": "Developed advanced Laravel Nova features, implemented caching strategies, and built custom Vue.js tools for the admin panel.",
+          "metrics": [
+            {
+              "id": "destinations",
+              "label": "Destinations"
+            },
+            {
+              "id": "countries",
+              "label": "Countries"
+            },
+            {
+              "id": "cacheHit",
+              "label": "Cache Hit"
+            },
+            {
+              "id": "response",
+              "label": "Response"
+            }
+          ],
+          "highlights": [
+            "Advanced features with Laravel Nova 4",
+            "Custom Vue.js tools for admin panel",
+            "JWT, Laravel Spatie, Laravel Excel integrations",
+            "Redis caching for optimal performance",
+            "Database optimization with query caching"
+          ]
+        }
+      }
+    }
+  ],
+  "experiences": [
+    {
+      "slug": "defensoria-del-deudor",
+      "company": "Defensoría del Deudor Servicios Profesionales",
+      "start_month": "2025-11",
+      "end_month": null,
+      "employment": "fullTime",
+      "work_mode": "onSite",
+      "international": false,
+      "tech": [
+        "Laravel 12",
+        "React 19",
+        "TypeScript",
+        "PostgreSQL",
+        "Redis",
+        "GCP",
+        "Docker"
+      ],
+      "position": 0,
+      "published": true,
+      "translations": {
+        "es": {
+          "title": "Desarrollador Full Stack Senior",
+          "location": "Santiago, Chile",
+          "description": "Liderando el desarrollo de “Nurturing”, una plataforma CRM a medida con flujos automatizados de email marketing y procesamiento distribuido de alto volumen.",
+          "highlights": [
+            "Arquitectura de un sistema distribuido que procesa más de 789.000 emails por campaña con 96% de entregabilidad",
+            "Implementación de 20 workers paralelos con colas Redis para mayor throughput",
+            "Sistema de idempotencia con locks distribuidos en Redis que garantiza cero envíos duplicados",
+            "Resolución de errores de memoria del navegador en listados de más de 350.000 registros"
+          ]
+        },
+        "en": {
+          "title": "Senior Full Stack Developer",
+          "location": "Santiago, Chile",
+          "description": "Leading development of “Nurturing” — a custom CRM platform with automated email marketing workflows and high-volume distributed processing.",
+          "highlights": [
+            "Architected distributed system processing 789,000+ emails per campaign with 96% delivery rate",
+            "Implemented 20 parallel workers with Redis queues for better throughput",
+            "Built idempotency system with distributed Redis locks ensuring zero duplicate sends",
+            "Fixed browser OOM issues on listings with 350,000+ records"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "match-my-course",
+      "company": "Match My Course",
+      "start_month": "2025-01",
+      "end_month": "2025-10",
+      "employment": "fullTime",
+      "work_mode": "remote",
+      "international": false,
+      "tech": [
+        "Next.js 15",
+        "Node.js",
+        "MongoDB",
+        "AWS S3",
+        "CloudFront",
+        "TypeScript"
+      ],
+      "position": 1,
+      "published": true,
+      "translations": {
+        "es": {
+          "title": "Desarrollador Full Stack Senior",
+          "location": "Chile",
+          "description": "Construcción de punta a punta de un marketplace educativo que conecta estudiantes con cursos de inglés en Irlanda y Nueva Zelanda.",
+          "highlights": [
+            "Arquitectura completa de la plataforma desde cero, sirviendo a más de 5.000 usuarios mensuales",
+            "Reducción del tiempo de carga en 40% con SSR + CDN de CloudFront",
+            "Optimización del tiempo de respuesta de la API de 800ms a 200ms",
+            "Aumento del 300% en tráfico orgánico mediante SEO técnico",
+            "Implementación de ISR para más de 500 páginas de escuelas con score Lighthouse 95+"
+          ]
+        },
+        "en": {
+          "title": "Senior Full Stack Developer",
+          "location": "Chile",
+          "description": "Built end-to-end an educational marketplace connecting students with English courses in Ireland and New Zealand.",
+          "highlights": [
+            "Architected full platform from scratch serving 5,000+ monthly users",
+            "Reduced page load time by 40% with SSR + CloudFront CDN",
+            "Optimized API response time from 800ms to 200ms",
+            "Achieved 300% increase in organic traffic through technical SEO",
+            "Implemented ISR for 500+ school pages with 95+ Lighthouse score"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "cable-color",
+      "company": "Cable Color S.A.",
+      "start_month": "2024-03",
+      "end_month": "2024-11",
+      "employment": "fullTime",
+      "work_mode": "remote",
+      "international": false,
+      "tech": [
+        "Laravel 10",
+        "React 18",
+        "TypeScript",
+        "Redux",
+        "MySQL",
+        "Tailwind CSS"
+      ],
+      "position": 2,
+      "published": true,
+      "translations": {
+        "es": {
+          "title": "Desarrollador Full Stack Senior",
+          "location": "Ovalle, Chile",
+          "description": "Lideré la migración completa del back office legado para más de 10 vendedores en 6 sucursales regionales.",
+          "highlights": [
+            "Reducción de los tiempos de carga en ~60% migrando a Laravel 10 + React 18",
+            "Mejora de la productividad del equipo comercial, reduciendo el tiempo por tarea en ~40%",
+            "APIs a medida con autenticación JWT sirviendo a 6 sucursales en tiempo real",
+            "Lideré un equipo de 4 desarrolladores entregando la migración en plazo"
+          ]
+        },
+        "en": {
+          "title": "Senior Full Stack Developer",
+          "location": "Ovalle, Chile",
+          "description": "Led full migration of legacy back office system for 10+ sales reps across 6 regional branches.",
+          "highlights": [
+            "Reduced page load times by ~60% migrating to Laravel 10 + React 18",
+            "Improved sales team productivity, reducing time-to-task by ~40%",
+            "Built custom APIs with JWT authentication serving 6 branches real-time",
+            "Led 4-developer team delivering migration on schedule"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "chile-pasajes",
+      "company": "Chile Pasajes S.A",
+      "start_month": "2024-03",
+      "end_month": "2024-08",
+      "employment": "contract",
+      "work_mode": "hybrid",
+      "international": false,
+      "tech": [
+        "Laravel 11",
+        "PHP 8.3",
+        "Vue.js",
+        "MySQL",
+        "Redis",
+        "Tailwind CSS"
+      ],
+      "position": 3,
+      "published": true,
+      "translations": {
+        "es": {
+          "title": "Desarrollador Full Stack",
+          "location": "Santiago, Chile",
+          "description": "Sistemas backend con Laravel 11, Laravel Nova 4 y frontend moderno con Vue.js.",
+          "highlights": [
+            "Desarrollo de funcionalidades avanzadas con Laravel Nova 4 + herramientas Vue.js a medida",
+            "Integraciones de JWT, Laravel Spatie y Laravel Excel",
+            "Optimización de performance con Redis y caché de queries de Laravel"
+          ]
+        },
+        "en": {
+          "title": "Full Stack Developer",
+          "location": "Santiago, Chile",
+          "description": "Backend systems with Laravel 11, Laravel Nova 4, and modern frontend with Vue.js.",
+          "highlights": [
+            "Developed advanced features with Laravel Nova 4 + custom Vue.js tools",
+            "Implemented JWT, Laravel Spatie, Laravel Excel integrations",
+            "Optimized performance with Redis and Laravel query caching"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "dividing-zero",
+      "company": "Dividing Zero",
+      "start_month": "2023-10",
+      "end_month": "2023-12",
+      "employment": "freelance",
+      "work_mode": "remote",
+      "international": true,
+      "tech": [
+        "Laravel 6",
+        "PHP 7.2",
+        "Vue.js",
+        "Bootstrap 5",
+        "JavaScript"
+      ],
+      "position": 4,
+      "published": true,
+      "translations": {
+        "es": {
+          "title": "Desarrollador Full Stack",
+          "location": "Auckland, Nueva Zelanda",
+          "description": "Mantenimiento y actualización de la plataforma NZVenues (nzvenues.co.nz).",
+          "highlights": [
+            "Mantuve la plataforma funcional, segura y actualizada",
+            "Entrega de aplicaciones web responsivas con Laravel 6 + Vue.js 2"
+          ]
+        },
+        "en": {
+          "title": "Full Stack Developer",
+          "location": "Auckland, New Zealand",
+          "description": "Maintained and updated NZVenues platform (nzvenues.co.nz).",
+          "highlights": [
+            "Ensured platform remained functional, secure, and up-to-date",
+            "Delivered responsive web applications with Laravel 6 + Vue.js 2"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "universidad-del-alba",
+      "company": "Universidad del Alba",
+      "start_month": "2018-03",
+      "end_month": "2023-01",
+      "employment": "fullTime",
+      "work_mode": "onSite",
+      "international": false,
+      "tech": [
+        "Laravel 5-8",
+        "Angular 8",
+        "PHP 7-8",
+        "TypeScript",
+        "MySQL",
+        "Bootstrap"
+      ],
+      "position": 5,
+      "published": true,
+      "translations": {
+        "es": {
+          "title": "Jefe de Proyectos TI → Desarrollador Full Stack",
+          "location": "Santiago, Chile",
+          "description": "Progresé de Desarrollador Full Stack a Jefe de Proyectos TI, liderando proyectos universitarios.",
+          "highlights": [
+            "Dirección de proyectos TI asegurando el cumplimiento de presupuestos y plazos",
+            "Desarrollo de soluciones a medida para facultades con Laravel 5.5-8 + Angular 8",
+            "Gestión de propuestas, selección de tecnologías y coordinación de equipos",
+            "Soporte técnico durante la implementación de nuevas tecnologías"
+          ]
+        },
+        "en": {
+          "title": "IT Project Manager → Full Stack Developer",
+          "location": "Santiago, Chile",
+          "description": "Progressed from Full Stack Developer to IT Project Manager, leading university projects.",
+          "highlights": [
+            "Directed IT projects ensuring adherence to budgets and timelines",
+            "Developed custom solutions for faculties using Laravel 5.5-8 + Angular 8",
+            "Managed project proposals, technology selection, and team coordination",
+            "Provided technical support during new technology implementations"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "americas-car-group",
+      "company": "Americas Car Group",
+      "start_month": "2017-02",
+      "end_month": "2018-01",
+      "employment": "fullTime",
+      "work_mode": "onSite",
+      "international": false,
+      "tech": [
+        "Laravel 5.5",
+        "PHP",
+        "PostgreSQL",
+        "Bootstrap",
+        "JavaScript"
+      ],
+      "position": 6,
+      "published": true,
+      "translations": {
+        "es": {
+          "title": "Desarrollador Web",
+          "location": "Santiago, Chile",
+          "description": "Análisis y desarrollo de requerimientos para las gerencias de la corporación.",
+          "highlights": [
+            "Análisis, modelado y mantenimiento de bases de datos con PostgreSQL",
+            "Desarrollo de sistemas con Laravel 5.5-5.6 + Bootstrap"
+          ]
+        },
+        "en": {
+          "title": "Web Developer",
+          "location": "Santiago, Chile",
+          "description": "Analysis and development of requirements for corporation managers.",
+          "highlights": [
+            "Database analysis, modeling and maintenance with PostgreSQL",
+            "Developed systems using Laravel 5.5-5.6 + Bootstrap"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "mas-cerca",
+      "company": "Mas Cerca Call Center S.A.",
+      "start_month": "2016-05",
+      "end_month": "2017-01",
+      "employment": "fullTime",
+      "work_mode": "onSite",
+      "international": false,
+      "tech": [
+        "PHP",
+        "MySQL",
+        "SQL Server",
+        "JavaScript",
+        "AJAX"
+      ],
+      "position": 7,
+      "published": true,
+      "translations": {
+        "es": {
+          "title": "Desarrollador Web",
+          "location": "Santiago, Chile",
+          "description": "Desarrollo de sistemas internos para la operación del call center.",
+          "highlights": [
+            "Construcción de dashboards de reportería y herramientas de análisis de datos",
+            "Implementación de soluciones backend orientadas a objetos"
+          ]
+        },
+        "en": {
+          "title": "Web Developer",
+          "location": "Santiago, Chile",
+          "description": "Internal systems development for call center operations.",
+          "highlights": [
+            "Built reporting dashboards and data analysis tools",
+            "Implemented OOP backend solutions"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "nuestragencia",
+      "company": "nuestrAgencia",
+      "start_month": "2015-05",
+      "end_month": "2016-03",
+      "employment": "fullTime",
+      "work_mode": "onSite",
+      "international": false,
+      "tech": [
+        "PHP",
+        "MySQL",
+        "JavaScript",
+        "Bootstrap"
+      ],
+      "position": 8,
+      "published": true,
+      "translations": {
+        "es": {
+          "title": "Desarrollador Web Junior",
+          "location": "Santiago, Chile",
+          "description": "Desarrollo web para proyectos de clientes en una agencia digital.",
+          "highlights": [
+            "Desarrollo y mantenimiento de aplicaciones web",
+            "Base de experiencia en desarrollo full stack"
+          ]
+        },
+        "en": {
+          "title": "Junior Web Developer",
+          "location": "Santiago, Chile",
+          "description": "Web development for client projects at a digital agency.",
+          "highlights": [
+            "Developed and maintained web applications",
+            "Gained foundational full-stack development experience"
+          ]
+        }
+      }
+    }
+  ],
+  "skillCategories": [
+    {
+      "slug": "frontend",
+      "icon": "frontend",
+      "color": "bg-blue-500/20 text-blue-400",
+      "skills": [
+        "React",
+        "Next.js 15",
+        "TypeScript",
+        "JavaScript",
+        "Vue.js",
+        "Tailwind CSS"
+      ],
+      "position": 0,
+      "translations": {
+        "es": {
+          "title": "Frontend"
+        },
+        "en": {
+          "title": "Frontend"
+        }
+      }
+    },
+    {
+      "slug": "backend",
+      "icon": "backend",
+      "color": "bg-green-500/20 text-green-400",
+      "skills": [
+        "Node.js",
+        "NestJS",
+        "Laravel",
+        "PHP",
+        "Express.js",
+        "REST APIs"
+      ],
+      "position": 1,
+      "translations": {
+        "es": {
+          "title": "Backend"
+        },
+        "en": {
+          "title": "Backend"
+        }
+      }
+    },
+    {
+      "slug": "database",
+      "icon": "database",
+      "color": "bg-purple-500/20 text-purple-400",
+      "skills": [
+        "PostgreSQL",
+        "MySQL",
+        "MongoDB",
+        "Redis"
+      ],
+      "position": 2,
+      "translations": {
+        "es": {
+          "title": "Bases de Datos"
+        },
+        "en": {
+          "title": "Database"
+        }
+      }
+    },
+    {
+      "slug": "cloud",
+      "icon": "cloud",
+      "color": "bg-orange-500/20 text-orange-400",
+      "skills": [
+        "AWS (EC2, S3, CloudFront, RDS)",
+        "GCP (Cloud Run, Cloud SQL)",
+        "Docker",
+        "CI/CD",
+        "GitHub Actions"
+      ],
+      "position": 3,
+      "translations": {
+        "es": {
+          "title": "Cloud y DevOps"
+        },
+        "en": {
+          "title": "Cloud & DevOps"
+        }
+      }
+    }
+  ],
+  "techIcons": [
+    {
+      "name": "React",
+      "icon_url": "https://cdn.simpleicons.org/react/61DAFB",
+      "row_group": "frontend",
+      "position": 0
+    },
+    {
+      "name": "Next.js",
+      "icon_url": "https://cdn.simpleicons.org/nextdotjs/FFFFFF",
+      "row_group": "frontend",
+      "position": 1
+    },
+    {
+      "name": "TypeScript",
+      "icon_url": "https://cdn.simpleicons.org/typescript/3178C6",
+      "row_group": "frontend",
+      "position": 2
+    },
+    {
+      "name": "JavaScript",
+      "icon_url": "https://cdn.simpleicons.org/javascript/F7DF1E",
+      "row_group": "frontend",
+      "position": 3
+    },
+    {
+      "name": "Vue.js",
+      "icon_url": "https://cdn.simpleicons.org/vuedotjs/4FC08D",
+      "row_group": "frontend",
+      "position": 4
+    },
+    {
+      "name": "Tailwind CSS",
+      "icon_url": "https://cdn.simpleicons.org/tailwindcss/06B6D4",
+      "row_group": "frontend",
+      "position": 5
+    },
+    {
+      "name": "Node.js",
+      "icon_url": "https://cdn.simpleicons.org/nodedotjs/5FA04E",
+      "row_group": "backend",
+      "position": 0
+    },
+    {
+      "name": "NestJS",
+      "icon_url": "https://cdn.simpleicons.org/nestjs/E0234E",
+      "row_group": "backend",
+      "position": 1
+    },
+    {
+      "name": "Laravel",
+      "icon_url": "https://cdn.simpleicons.org/laravel/FF2D20",
+      "row_group": "backend",
+      "position": 2
+    },
+    {
+      "name": "PHP",
+      "icon_url": "https://cdn.simpleicons.org/php/777BB4",
+      "row_group": "backend",
+      "position": 3
+    },
+    {
+      "name": "Express",
+      "icon_url": "https://cdn.simpleicons.org/express/FFFFFF",
+      "row_group": "backend",
+      "position": 4
+    },
+    {
+      "name": "PostgreSQL",
+      "icon_url": "https://cdn.simpleicons.org/postgresql/4169E1",
+      "row_group": "backend",
+      "position": 5
+    },
+    {
+      "name": "MongoDB",
+      "icon_url": "https://cdn.simpleicons.org/mongodb/47A248",
+      "row_group": "backend",
+      "position": 6
+    },
+    {
+      "name": "Redis",
+      "icon_url": "https://cdn.simpleicons.org/redis/DC382D",
+      "row_group": "backend",
+      "position": 7
+    },
+    {
+      "name": "AWS",
+      "icon_url": "https://cdn.simpleicons.org/amazonwebservices/FF9900",
+      "row_group": "devops",
+      "position": 0
+    },
+    {
+      "name": "Google Cloud",
+      "icon_url": "https://cdn.simpleicons.org/googlecloud/4285F4",
+      "row_group": "devops",
+      "position": 1
+    },
+    {
+      "name": "Docker",
+      "icon_url": "https://cdn.simpleicons.org/docker/2496ED",
+      "row_group": "devops",
+      "position": 2
+    },
+    {
+      "name": "GitHub Actions",
+      "icon_url": "https://cdn.simpleicons.org/githubactions/2088FF",
+      "row_group": "devops",
+      "position": 3
+    },
+    {
+      "name": "Git",
+      "icon_url": "https://cdn.simpleicons.org/git/F05032",
+      "row_group": "devops",
+      "position": 4
+    },
+    {
+      "name": "MySQL",
+      "icon_url": "https://cdn.simpleicons.org/mysql/4479A1",
+      "row_group": "devops",
+      "position": 5
+    }
+  ],
+  "services": [
+    {
+      "slug": "custom-software",
+      "icon": "custom-software",
+      "accent": "blue",
+      "position": 0,
+      "published": true,
+      "translations": {
+        "es": {
+          "title": "Software a Medida",
+          "description": "Desarrollo de aplicaciones web y móviles diseñadas específicamente para las necesidades de tu negocio.",
+          "features": [
+            "Aplicaciones web escalables",
+            "APIs robustas y seguras",
+            "Arquitectura limpia",
+            "Interfaces modernas"
+          ],
+          "cta": "Consultar"
+        },
+        "en": {
+          "title": "Custom Software",
+          "description": "Web and mobile application development designed specifically for your business needs.",
+          "features": [
+            "Scalable web applications",
+            "Robust and secure APIs",
+            "Clean architecture",
+            "Modern interfaces"
+          ],
+          "cta": "Get Started"
+        }
+      }
+    },
+    {
+      "slug": "automations",
+      "icon": "automations",
+      "accent": "purple",
+      "position": 1,
+      "published": true,
+      "translations": {
+        "es": {
+          "title": "Automatizaciones",
+          "description": "Optimiza tus procesos eliminando tareas manuales y conectando tus herramientas existentes.",
+          "features": [
+            "Flujos de email masivos",
+            "Integraciones con terceros",
+            "Reducción de trabajo manual",
+            "Workflows automatizados"
+          ],
+          "cta": "Automatizar mi negocio"
+        },
+        "en": {
+          "title": "Automations",
+          "description": "Optimize your processes by eliminating manual tasks and connecting your existing tools.",
+          "features": [
+            "Mass email flows",
+            "Third-party integrations",
+            "Manual work reduction",
+            "Automated workflows"
+          ],
+          "cta": "Automate my business"
+        }
+      }
+    },
+    {
+      "slug": "consulting",
+      "icon": "consulting",
+      "accent": "amber",
+      "position": 2,
+      "published": true,
+      "translations": {
+        "es": {
+          "title": "Consultoría Técnica",
+          "description": "Asesoramiento experto para tomar las mejores decisiones tecnológicas en tu empresa.",
+          "features": [
+            "Revisión de arquitectura",
+            "Optimización de performance",
+            "Mentoría de equipos",
+            "Code reviews"
+          ],
+          "cta": "Agendar consulta"
+        },
+        "en": {
+          "title": "Technical Consulting",
+          "description": "Expert advice to make the best technology decisions for your company.",
+          "features": [
+            "Architecture review",
+            "Performance optimization",
+            "Team mentoring",
+            "Code reviews"
+          ],
+          "cta": "Book a consultation"
+        }
+      }
+    }
+  ],
+  "siteCopy": [
+    {
+      "key": "about.bio",
+      "translations": {
+        "es": "Consultor de software con más de 10 años de experiencia construyendo soluciones escalables para clientes en LATAM y el mundo. Especializado en arquitectura frontend, automatizaciones y mentoría técnica.",
+        "en": "Software consultant with 10+ years of experience building scalable solutions for clients across LATAM and worldwide. Specialized in frontend architecture, automations and technical mentoring."
+      }
+    },
+    {
+      "key": "about.languages.items",
+      "translations": {
+        "es": [
+          {
+            "name": "Español",
+            "level": "Nativo"
+          },
+          {
+            "name": "Inglés",
+            "level": "Profesional"
+          }
+        ],
+        "en": [
+          {
+            "name": "Spanish",
+            "level": "Native"
+          },
+          {
+            "name": "English",
+            "level": "Professional"
+          }
+        ]
+      }
+    },
+    {
+      "key": "about.languages.title",
+      "translations": {
+        "es": "Idiomas",
+        "en": "Languages"
+      }
+    },
+    {
+      "key": "about.metrics.items",
+      "translations": {
+        "es": [
+          {
+            "value": "50+",
+            "label": "Proyectos Entregados"
+          },
+          {
+            "value": "10+",
+            "label": "Años de Experiencia"
+          },
+          {
+            "value": "30+",
+            "label": "Clientes Satisfechos"
+          },
+          {
+            "value": "99%",
+            "label": "Tasa de Éxito"
+          }
+        ],
+        "en": [
+          {
+            "value": "50+",
+            "label": "Projects Delivered"
+          },
+          {
+            "value": "10+",
+            "label": "Years of Experience"
+          },
+          {
+            "value": "30+",
+            "label": "Happy Clients"
+          },
+          {
+            "value": "99%",
+            "label": "Success Rate"
+          }
+        ]
+      }
+    },
+    {
+      "key": "about.subtitle",
+      "translations": {
+        "es": "Más de una década creando soluciones digitales",
+        "en": "Over a decade creating digital solutions"
+      }
+    },
+    {
+      "key": "about.title",
+      "translations": {
+        "es": "Sobre Mí",
+        "en": "About Me"
+      }
+    },
+    {
+      "key": "common.close",
+      "translations": {
+        "es": "Cerrar",
+        "en": "Close"
+      }
+    },
+    {
+      "key": "common.present",
+      "translations": {
+        "es": "Presente",
+        "en": "Present"
+      }
+    },
+    {
+      "key": "contact.form.company",
+      "translations": {
+        "es": "Empresa (opcional)",
+        "en": "Company (optional)"
+      }
+    },
+    {
+      "key": "contact.form.companyPlaceholder",
+      "translations": {
+        "es": "Nombre de tu empresa",
+        "en": "Your company name"
+      }
+    },
+    {
+      "key": "contact.form.email",
+      "translations": {
+        "es": "Email",
+        "en": "Email"
+      }
+    },
+    {
+      "key": "contact.form.emailPlaceholder",
+      "translations": {
+        "es": "tu@email.com",
+        "en": "you@email.com"
+      }
+    },
+    {
+      "key": "contact.form.error",
+      "translations": {
+        "es": "Error al enviar. Por favor, intenta de nuevo.",
+        "en": "Error sending. Please try again."
+      }
+    },
+    {
+      "key": "contact.form.message",
+      "translations": {
+        "es": "Mensaje",
+        "en": "Message"
+      }
+    },
+    {
+      "key": "contact.form.messagePlaceholder",
+      "translations": {
+        "es": "Contame sobre tu proyecto...",
+        "en": "Tell me about your project..."
+      }
+    },
+    {
+      "key": "contact.form.name",
+      "translations": {
+        "es": "Nombre",
+        "en": "Name"
+      }
+    },
+    {
+      "key": "contact.form.namePlaceholder",
+      "translations": {
+        "es": "Tu nombre",
+        "en": "Your name"
+      }
+    },
+    {
+      "key": "contact.form.service",
+      "translations": {
+        "es": "Servicio",
+        "en": "Service"
+      }
+    },
+    {
+      "key": "contact.form.serviceOptions",
+      "translations": {
+        "es": [
+          {
+            "value": "software",
+            "label": "Software a Medida"
+          },
+          {
+            "value": "automations",
+            "label": "Automatizaciones"
+          },
+          {
+            "value": "consulting",
+            "label": "Consultoría Técnica"
+          },
+          {
+            "value": "other",
+            "label": "Otro"
+          }
+        ],
+        "en": [
+          {
+            "value": "software",
+            "label": "Custom Software"
+          },
+          {
+            "value": "automations",
+            "label": "Automations"
+          },
+          {
+            "value": "consulting",
+            "label": "Technical Consulting"
+          },
+          {
+            "value": "other",
+            "label": "Other"
+          }
+        ]
+      }
+    },
+    {
+      "key": "contact.form.servicePlaceholder",
+      "translations": {
+        "es": "Selecciona un servicio",
+        "en": "Select a service"
+      }
+    },
+    {
+      "key": "contact.form.submit",
+      "translations": {
+        "es": "Enviar mensaje",
+        "en": "Send message"
+      }
+    },
+    {
+      "key": "contact.form.submitting",
+      "translations": {
+        "es": "Enviando...",
+        "en": "Sending..."
+      }
+    },
+    {
+      "key": "contact.form.success",
+      "translations": {
+        "es": "¡Mensaje enviado! Te responderé pronto.",
+        "en": "Message sent! I will get back to you soon."
+      }
+    },
+    {
+      "key": "contact.social.title",
+      "translations": {
+        "es": "También podés encontrarme en",
+        "en": "You can also find me on"
+      }
+    },
+    {
+      "key": "contact.subtitle",
+      "translations": {
+        "es": "¿Tenés una idea? Contame cómo puedo ayudarte",
+        "en": "Have an idea? Tell me how I can help"
+      }
+    },
+    {
+      "key": "contact.title",
+      "translations": {
+        "es": "Hablemos de tu proyecto",
+        "en": "Let's discuss your project"
+      }
+    },
+    {
+      "key": "experience.employment.contract",
+      "translations": {
+        "es": "Contrato",
+        "en": "Contract"
+      }
+    },
+    {
+      "key": "experience.employment.freelance",
+      "translations": {
+        "es": "Freelance",
+        "en": "Freelance"
+      }
+    },
+    {
+      "key": "experience.employment.fullTime",
+      "translations": {
+        "es": "Tiempo completo",
+        "en": "Full-time"
+      }
+    },
+    {
+      "key": "experience.international",
+      "translations": {
+        "es": "Internacional",
+        "en": "International"
+      }
+    },
+    {
+      "key": "experience.subtitle",
+      "translations": {
+        "es": "+10 años construyendo aplicaciones web en 3 países",
+        "en": "10+ years building web applications across 3 countries"
+      }
+    },
+    {
+      "key": "experience.summary",
+      "translations": {
+        "es": [
+          {
+            "value": "10+",
+            "label": "Años de Experiencia"
+          },
+          {
+            "value": "3",
+            "label": "Países"
+          },
+          {
+            "value": "9",
+            "label": "Empresas"
+          }
+        ],
+        "en": [
+          {
+            "value": "10+",
+            "label": "Years Experience"
+          },
+          {
+            "value": "3",
+            "label": "Countries Worked"
+          },
+          {
+            "value": "9",
+            "label": "Companies"
+          }
+        ]
+      }
+    },
+    {
+      "key": "experience.title",
+      "translations": {
+        "es": "Experiencia",
+        "en": "Experience"
+      }
+    },
+    {
+      "key": "experience.viewEarlier",
+      "translations": {
+        "es": "Ver {count} posiciones anteriores",
+        "en": "View {count} earlier positions"
+      }
+    },
+    {
+      "key": "experience.workMode.hybrid",
+      "translations": {
+        "es": "Híbrido",
+        "en": "Hybrid"
+      }
+    },
+    {
+      "key": "experience.workMode.onSite",
+      "translations": {
+        "es": "Presencial",
+        "en": "On-site"
+      }
+    },
+    {
+      "key": "experience.workMode.remote",
+      "translations": {
+        "es": "Remoto",
+        "en": "Remote"
+      }
+    },
+    {
+      "key": "hero.badge",
+      "translations": {
+        "es": "10+ Años Construyendo Software",
+        "en": "10+ Years Building Software"
+      }
+    },
+    {
+      "key": "hero.ctaPrimary",
+      "translations": {
+        "es": "Agendar Consulta",
+        "en": "Book Consultation"
+      }
+    },
+    {
+      "key": "hero.ctaSecondary",
+      "translations": {
+        "es": "Ver Casos de Éxito",
+        "en": "See Case Studies"
+      }
+    },
+    {
+      "key": "hero.intro",
+      "translations": {
+        "es": "Hola, soy Marcelo Toro, consultor de desarrollo de software",
+        "en": "Hi, I'm Marcelo Toro, a software development consultant"
+      }
+    },
+    {
+      "key": "hero.marquee",
+      "translations": {
+        "es": [
+          "Escalable",
+          "Alto Rendimiento",
+          "Código Limpio",
+          "Enfocado en Resultados"
+        ],
+        "en": [
+          "Scalable",
+          "High Performance",
+          "Clean Code",
+          "Results-Driven"
+        ]
+      }
+    },
+    {
+      "key": "hero.subtitle",
+      "translations": {
+        "es": "Soluciones digitales a medida para empresas que buscan escalar, automatizar procesos y optimizar su operación.",
+        "en": "Custom digital solutions for companies looking to scale, automate processes and optimize their operations."
+      }
+    },
+    {
+      "key": "hero.titlePart1",
+      "translations": {
+        "es": "Construyo software que",
+        "en": "I build software that"
+      }
+    },
+    {
+      "key": "hero.titlePart2",
+      "translations": {
+        "es": "transforma negocios",
+        "en": "transforms businesses"
+      }
+    },
+    {
+      "key": "language.label",
+      "translations": {
+        "es": "Cambiar a Inglés",
+        "en": "Switch to Spanish"
+      }
+    },
+    {
+      "key": "nav.about",
+      "translations": {
+        "es": "Sobre Mí",
+        "en": "About"
+      }
+    },
+    {
+      "key": "nav.contact",
+      "translations": {
+        "es": "Contacto",
+        "en": "Contact"
+      }
+    },
+    {
+      "key": "nav.experience",
+      "translations": {
+        "es": "Experiencia",
+        "en": "Experience"
+      }
+    },
+    {
+      "key": "nav.home",
+      "translations": {
+        "es": "Inicio",
+        "en": "Home"
+      }
+    },
+    {
+      "key": "nav.projects",
+      "translations": {
+        "es": "Proyectos",
+        "en": "Projects"
+      }
+    },
+    {
+      "key": "nav.skills",
+      "translations": {
+        "es": "Habilidades",
+        "en": "Skills"
+      }
+    },
+    {
+      "key": "projects.labels.highlights",
+      "translations": {
+        "es": "Destacados",
+        "en": "Highlights"
+      }
+    },
+    {
+      "key": "projects.labels.metrics",
+      "translations": {
+        "es": "Métricas Clave",
+        "en": "Key Metrics"
+      }
+    },
+    {
+      "key": "projects.labels.problem",
+      "translations": {
+        "es": "El Problema",
+        "en": "The Problem"
+      }
+    },
+    {
+      "key": "projects.labels.solution",
+      "translations": {
+        "es": "La Solución",
+        "en": "The Solution"
+      }
+    },
+    {
+      "key": "projects.labels.technologies",
+      "translations": {
+        "es": "Stack Tecnológico",
+        "en": "Tech Stack"
+      }
+    },
+    {
+      "key": "projects.labels.viewGithub",
+      "translations": {
+        "es": "Ver en GitHub",
+        "en": "View on GitHub"
+      }
+    },
+    {
+      "key": "projects.labels.viewLive",
+      "translations": {
+        "es": "Ver sitio en vivo",
+        "en": "View Live Site"
+      }
+    },
+    {
+      "key": "projects.subtitle",
+      "translations": {
+        "es": "Resultados reales para clientes reales",
+        "en": "Real results for real clients"
+      }
+    },
+    {
+      "key": "projects.title",
+      "translations": {
+        "es": "Casos de Éxito",
+        "en": "Case Studies"
+      }
+    },
+    {
+      "key": "projects.viewMore",
+      "translations": {
+        "es": "Ver más proyectos",
+        "en": "See more projects"
+      }
+    },
+    {
+      "key": "services.subtitle",
+      "translations": {
+        "es": "Soluciones tecnológicas que impulsan tu negocio",
+        "en": "Technology solutions that drive your business"
+      }
+    },
+    {
+      "key": "services.title",
+      "translations": {
+        "es": "Servicios",
+        "en": "Services"
+      }
+    },
+    {
+      "key": "skills.subtitle",
+      "translations": {
+        "es": "Tecnologías con las que trabajo a diario",
+        "en": "Technologies I work with daily"
+      }
+    },
+    {
+      "key": "skills.title",
+      "translations": {
+        "es": "Stack Tecnológico",
+        "en": "Tech Stack"
+      }
+    }
+  ]
+}

@@ -4,7 +4,7 @@ import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import { z } from 'zod'
 import { useI18n } from '@/composables/useI18n'
-import type { ServiceOption } from '@/i18n/es'
+import type { ServiceOption } from '@/i18n'
 
 const { t, tRaw } = useI18n()
 

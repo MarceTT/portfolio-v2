@@ -2,143 +2,36 @@
 import { computed } from 'vue'
 import { CardSpotlight } from '@/components/ui/card-spotlight'
 import { useTheme } from '@/composables/useTheme'
+import { useI18n } from '@/composables/useI18n'
+import { experiences, VISIBLE_EXPERIENCE_COUNT } from '@/data/experience'
+import type { ExperienceCopy, MetricItem } from '@/i18n'
 
 const { isDark } = useTheme()
+const { t, tRaw, formatMonthYear } = useI18n()
 
-const experiences = [
-  {
-    title: 'Senior Full Stack Developer',
-    company: 'Defensoría del Deudor Servicios Profesionales',
-    location: 'Santiago, Chile',
-    period: 'Nov 2025 - Present',
-    type: 'Full-time · On-site',
-    description: 'Leading development of "Nurturing" — a custom CRM platform with automated email marketing workflows and high-volume distributed processing.',
-    highlights: [
-      'Architected distributed system processing 789,000+ emails per campaign with 96% delivery rate',
-      'Implemented 20 parallel workers with Redis queues for better throughput',
-      'Built idempotency system with distributed Redis locks ensuring zero duplicate sends',
-      'Fixed browser OOM issues on listings with 350,000+ records',
-    ],
-    tech: ['Laravel 12', 'React 19', 'TypeScript', 'PostgreSQL', 'Redis', 'GCP', 'Docker'],
-  },
-  {
-    title: 'Senior Full Stack Developer',
-    company: 'Match My Course',
-    location: 'Chile · Remote',
-    period: 'Jan 2025 - Oct 2025',
-    type: 'Full-time · Remote',
-    description: 'Built end-to-end an educational marketplace connecting students with English courses in Ireland and New Zealand.',
-    highlights: [
-      'Architected full platform from scratch serving 5,000+ monthly users',
-      'Reduced page load time by 40% with SSR + CloudFront CDN',
-      'Optimized API response time from 800ms to 200ms',
-      'Achieved 300% increase in organic traffic through technical SEO',
-      'Implemented ISR for 500+ school pages with 95+ Lighthouse score',
-    ],
-    tech: ['Next.js 15', 'Node.js', 'MongoDB', 'AWS S3', 'CloudFront', 'TypeScript'],
-  },
-  {
-    title: 'Senior Full Stack Developer',
-    company: 'Cable Color S.A.',
-    location: 'Ovalle, Chile · Remote',
-    period: 'Mar 2024 - Nov 2024',
-    type: 'Full-time · Remote',
-    description: 'Led full migration of legacy back office system for 10+ sales reps across 6 regional branches.',
-    highlights: [
-      'Reduced page load times by ~60% migrating to Laravel 10 + React 18',
-      'Improved sales team productivity, reducing time-to-task by ~40%',
-      'Built custom APIs with JWT authentication serving 6 branches real-time',
-      'Led 4-developer team delivering migration on schedule',
-    ],
-    tech: ['Laravel 10', 'React 18', 'TypeScript', 'Redux', 'MySQL', 'Tailwind CSS'],
-  },
-  {
-    title: 'Full Stack Developer',
-    company: 'Chile Pasajes S.A',
-    location: 'Santiago, Chile · Hybrid',
-    period: 'Mar 2024 - Aug 2024',
-    type: 'Contract · Hybrid',
-    description: 'Backend systems with Laravel 11, Laravel Nova 4, and modern frontend with Vue.js.',
-    highlights: [
-      'Developed advanced features with Laravel Nova 4 + custom Vue.js tools',
-      'Implemented JWT, Laravel Spatie, Laravel Excel integrations',
-      'Optimized performance with Redis and Laravel query caching',
-    ],
-    tech: ['Laravel 11', 'PHP 8.3', 'Vue.js', 'MySQL', 'Redis', 'Tailwind CSS'],
-  },
-  {
-    title: 'Full Stack Developer',
-    company: 'Dividing Zero',
-    location: 'Auckland, New Zealand · Remote',
-    period: 'Oct 2023 - Dec 2023',
-    type: 'Freelance · Remote',
-    description: 'Maintained and updated NZVenues platform (nzvenues.co.nz).',
-    highlights: [
-      'Ensured platform remained functional, secure, and up-to-date',
-      'Delivered responsive web applications with Laravel 6 + Vue.js 2',
-    ],
-    tech: ['Laravel 6', 'PHP 7.2', 'Vue.js', 'Bootstrap 5', 'JavaScript'],
-    international: true,
-  },
-  {
-    title: 'IT Project Manager → Full Stack Developer',
-    company: 'Universidad del Alba',
-    location: 'Santiago, Chile',
-    period: 'Mar 2018 - Jan 2023',
-    type: 'Full-time · 4 yrs 11 mos',
-    description: 'Progressed from Full Stack Developer to IT Project Manager, leading university projects.',
-    highlights: [
-      'Directed IT projects ensuring adherence to budgets and timelines',
-      'Developed custom solutions for faculties using Laravel 5.5-8 + Angular 8',
-      'Managed project proposals, technology selection, and team coordination',
-      'Provided technical support during new technology implementations',
-    ],
-    tech: ['Laravel 5-8', 'Angular 8', 'PHP 7-8', 'TypeScript', 'MySQL', 'Bootstrap'],
-  },
-  {
-    title: 'Web Developer',
-    company: 'Americas Car Group',
-    location: 'Santiago, Chile',
-    period: 'Feb 2017 - Jan 2018',
-    type: 'Full-time · 1 yr',
-    description: 'Analysis and development of requirements for corporation managers.',
-    highlights: [
-      'Database analysis, modeling and maintenance with PostgreSQL',
-      'Developed systems using Laravel 5.5-5.6 + Bootstrap',
-    ],
-    tech: ['Laravel 5.5', 'PHP', 'PostgreSQL', 'Bootstrap', 'JavaScript'],
-  },
-  {
-    title: 'Web Developer',
-    company: 'Mas Cerca Call Center S.A.',
-    location: 'Santiago, Chile',
-    period: 'May 2016 - Jan 2017',
-    type: 'Full-time · 9 mos',
-    description: 'Internal systems development for call center operations.',
-    highlights: [
-      'Built reporting dashboards and data analysis tools',
-      'Implemented OOP backend solutions',
-    ],
-    tech: ['PHP', 'MySQL', 'SQL Server', 'JavaScript', 'AJAX'],
-  },
-  {
-    title: 'Junior Web Developer',
-    company: 'nuestrAgencia',
-    location: 'Santiago, Chile',
-    period: 'May 2015 - Mar 2016',
-    type: 'Full-time · 11 mos',
-    description: 'Web development for client projects at a digital agency.',
-    highlights: [
-      'Developed and maintained web applications',
-      'Gained foundational full-stack development experience',
-    ],
-    tech: ['PHP', 'MySQL', 'JavaScript', 'Bootstrap'],
-  },
-]
+// Join each role with its translated copy and build the localized period and type lines
+const localizedExperiences = computed(() => {
+  const copy = tRaw<ExperienceCopy[]>('experience.items')
 
-// Show first 4 by default, expand to see all
-const visibleExperiences = computed(() => experiences.slice(0, 4))
-const hiddenExperiences = computed(() => experiences.slice(4))
+  return experiences.map((experience) => {
+    const text = copy.find((item) => item.id === experience.id)
+    const end = experience.end ? formatMonthYear(experience.end) : t('common.present')
+
+    return {
+      ...experience,
+      title: text?.title ?? experience.company,
+      location: text?.location ?? '',
+      description: text?.description ?? '',
+      highlights: text?.highlights ?? [],
+      period: `${formatMonthYear(experience.start)} - ${end}`,
+      type: `${t(`experience.employment.${experience.employment}`)} · ${t(`experience.workMode.${experience.workMode}`)}`,
+    }
+  })
+})
+
+const visibleExperiences = computed(() => localizedExperiences.value.slice(0, VISIBLE_EXPERIENCE_COUNT))
+const hiddenExperiences = computed(() => localizedExperiences.value.slice(VISIBLE_EXPERIENCE_COUNT))
+const summary = computed(() => tRaw<MetricItem[]>('experience.summary'))
 </script>
 
 <template>
@@ -146,10 +39,10 @@ const hiddenExperiences = computed(() => experiences.slice(4))
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
       <div class="mb-16 text-center">
         <h2 class="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-          Experience
+          {{ t('experience.title') }}
         </h2>
         <p class="mt-4 text-lg text-muted-foreground">
-          10+ years building web applications across 3 countries
+          {{ t('experience.subtitle') }}
         </p>
       </div>
 
@@ -157,7 +50,7 @@ const hiddenExperiences = computed(() => experiences.slice(4))
         <!-- Main experiences -->
         <CardSpotlight
           v-for="exp in visibleExperiences"
-          :key="exp.company + exp.period"
+          :key="exp.id"
           class="p-6"
           :gradient-color="isDark ? '#262626' : '#e5e5e5'"
         >
@@ -169,7 +62,7 @@ const hiddenExperiences = computed(() => experiences.slice(4))
                   v-if="exp.international"
                   class="rounded-full bg-blue-500/20 px-2 py-0.5 text-xs font-medium text-blue-400"
                 >
-                  International
+                  {{ t('experience.international') }}
                 </span>
               </div>
               <div class="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
@@ -211,7 +104,7 @@ const hiddenExperiences = computed(() => experiences.slice(4))
         <!-- Earlier experiences (collapsed) -->
         <details class="group">
           <summary class="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-border/50 bg-card/30 px-4 py-3 text-sm font-medium transition-colors hover:bg-card/50">
-            <span>View {{ hiddenExperiences.length }} earlier positions</span>
+            <span>{{ t('experience.viewEarlier', { count: hiddenExperiences.length }) }}</span>
             <svg
               class="h-4 w-4 transition-transform group-open:rotate-180"
               fill="none"
@@ -225,7 +118,7 @@ const hiddenExperiences = computed(() => experiences.slice(4))
           <div class="mt-4 space-y-4">
             <CardSpotlight
               v-for="exp in hiddenExperiences"
-              :key="exp.company + exp.period"
+              :key="exp.id"
               class="p-5"
               :gradient-color="isDark ? '#262626' : '#e5e5e5'"
             >
@@ -258,17 +151,13 @@ const hiddenExperiences = computed(() => experiences.slice(4))
 
       <!-- Career summary -->
       <div class="mt-12 grid gap-4 sm:grid-cols-3">
-        <div class="rounded-xl border border-border/50 bg-card/30 p-4 text-center">
-          <div class="text-3xl font-bold text-primary">10+</div>
-          <div class="text-sm text-muted-foreground">Years Experience</div>
-        </div>
-        <div class="rounded-xl border border-border/50 bg-card/30 p-4 text-center">
-          <div class="text-3xl font-bold text-primary">3</div>
-          <div class="text-sm text-muted-foreground">Countries Worked</div>
-        </div>
-        <div class="rounded-xl border border-border/50 bg-card/30 p-4 text-center">
-          <div class="text-3xl font-bold text-primary">9</div>
-          <div class="text-sm text-muted-foreground">Companies</div>
+        <div
+          v-for="item in summary"
+          :key="item.label"
+          class="rounded-xl border border-border/50 bg-card/30 p-4 text-center"
+        >
+          <div class="text-3xl font-bold text-primary">{{ item.value }}</div>
+          <div class="text-sm text-muted-foreground">{{ item.label }}</div>
         </div>
       </div>
     </div>
