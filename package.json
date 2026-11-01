@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "prerender": "npm run ensure:chrome && node scripts/prerender.mjs",
     "test:locales": "node scripts/test-locales.mjs",
-    "ensure:chrome": "puppeteer browsers install chrome"
+    "ensure:chrome": "puppeteer browsers install chrome",
+    "test:form": "node scripts/test-contact-form.mjs"
   },
   "dependencies": {
     "@vee-validate/zod": "^4.15.1",
@@ -23,7 +24,7 @@
     "tailwind-merge": "^3.4.0",
     "vee-validate": "^4.15.1",
     "vue": "^3.5.24",
-    "zod": "^3.25.76"
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.18",

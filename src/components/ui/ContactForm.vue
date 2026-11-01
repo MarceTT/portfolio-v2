@@ -8,7 +8,8 @@ import type { ServiceOption } from '@/i18n'
 
 const { t, tRaw } = useI18n()
 
-// Zod schema for form validation
+// Zod schema for form validation.
+// `z.email()` is the zod 4 spelling of what used to be `z.string().email()`.
 const contactSchema = z.object({
   name: z
     .string()
@@ -17,7 +18,7 @@ const contactSchema = z.object({
   email: z
     .string()
     .min(1, 'Email is required')
-    .email('Please enter a valid email'),
+    .pipe(z.email('Please enter a valid email')),
   company: z.string().optional(),
   service: z.string().optional(),
   message: z
