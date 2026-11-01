@@ -9,8 +9,9 @@
     "test:sync": "node scripts/test-sync-content.mjs",
     "build": "npm run sync:content && vue-tsc -b && vite build && npm run prerender",
     "preview": "vite preview",
-    "prerender": "node scripts/prerender.mjs",
-    "test:locales": "node scripts/test-locales.mjs"
+    "prerender": "npm run ensure:chrome && node scripts/prerender.mjs",
+    "test:locales": "node scripts/test-locales.mjs",
+    "ensure:chrome": "puppeteer browsers install chrome"
   },
   "dependencies": {
     "@vee-validate/zod": "^4.15.1",
