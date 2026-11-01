@@ -21,12 +21,11 @@
 # security. Set SUPABASE_URL and SUPABASE_SECRET_KEY in the Netlify UI, never here.
 # If they are missing the build still succeeds with the committed snapshot.
 
-# /en without the trailing slash is the same page, not a second URL for it.
-[[redirects]]
-  from = "/en"
-  to = "/en/"
-  status = 301
-  force = true
+# There is deliberately no /en -> /en/ rule here.
+#
+# Netlify already serves dist/en/index.html for both, and matching treats the two as
+# the same path: a rule from "/en" also matches "/en/", so with force = true the page
+# redirected to itself until the browser gave up.
 
 # Send a first-time English speaker to the English page.
 #
