@@ -11,6 +11,12 @@
 [build.environment]
   NODE_VERSION = "20"
 
+  # Prerendering needs a browser, and the build server has none. Puppeteer's
+  # Chromium is downloaded here, inside the repository, because Netlify caches that
+  # between builds; its default location in the home directory is not cached and
+  # would be fetched again on every deploy.
+  PUPPETEER_CACHE_DIR = "/opt/build/repo/.cache/puppeteer"
+
 # Reading the content at build time needs the secret key, which bypasses row level
 # security. Set SUPABASE_URL and SUPABASE_SECRET_KEY in the Netlify UI, never here.
 # If they are missing the build still succeeds with the committed snapshot.

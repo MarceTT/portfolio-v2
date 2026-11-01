@@ -22,8 +22,36 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const DIST = resolve(ROOT, 'dist')
 const SITE = 'https://marcelo-toro-portfolio.netlify.app'
 
-const CHROME =
-  process.env.CHROME_PATH ?? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+/**
+ * Finds a Chrome to render with.
+ *
+ * Puppeteer's bundled Chromium is what makes this work on a build server; the
+ * installed browser is preferred locally because it is already there. Hard-coding
+ * the macOS path would have let the build succeed on CI while quietly skipping the
+ * prerender, shipping an empty shell to crawlers.
+ */
+const findChrome = async () => {
+  if (process.env.CHROME_PATH) return process.env.CHROME_PATH
+
+  // PRERENDER_USE_PUPPETEER lets a test exercise the path a Linux build server takes.
+  if (process.env.PRERENDER_USE_PUPPETEER !== '1') {
+    const local = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+    if (existsSync(local)) return local
+  }
+
+  try {
+    const { executablePath } = await import('puppeteer')
+    // Recent Puppeteer resolves this asynchronously; older versions return a string.
+    const path = await executablePath()
+    if (path && existsSync(path)) return path
+  } catch {
+    // Puppeteer is not installed; fall through.
+  }
+
+  return null
+}
+
+const CHROME = await findChrome()
 
 const LOCALES = [
   {
@@ -74,10 +102,14 @@ if (!existsSync(join(DIST, 'index.html'))) {
   process.exit(1)
 }
 
-if (!existsSync(CHROME)) {
-  console.warn(`[prerender] Chrome not found at ${CHROME}; leaving the built HTML as is.`)
-  process.exit(0)
+if (!CHROME) {
+  // Loud and fatal: a silent skip here means shipping a site that search engines
+  // cannot read, which is the whole reason this script exists.
+  console.error('[prerender] No Chrome available. Install puppeteer or set CHROME_PATH.')
+  process.exit(1)
 }
+
+console.log(`[prerender] Using ${CHROME}`)
 
 // --- Serve dist, mapping every locale path to the SPA shell --------------------
 
