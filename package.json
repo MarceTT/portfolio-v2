@@ -7,8 +7,10 @@
     "dev": "vite",
     "sync:content": "node scripts/sync-content.mjs",
     "test:sync": "node scripts/test-sync-content.mjs",
-    "build": "npm run sync:content && vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "build": "npm run sync:content && vue-tsc -b && vite build && npm run prerender",
+    "preview": "vite preview",
+    "prerender": "node scripts/prerender.mjs",
+    "test:locales": "node scripts/test-locales.mjs"
   },
   "dependencies": {
     "@vee-validate/zod": "^4.15.1",

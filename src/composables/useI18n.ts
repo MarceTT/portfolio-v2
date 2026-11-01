@@ -3,6 +3,16 @@ import { translations, defaultLocale, getNestedValue, type Locale, type Translat
 
 const STORAGE_KEY = 'portfolio-locale'
 
+/** Each locale has its own URL, which is what makes both versions indexable. */
+export const pathForLocale = (locale: Locale): string => (locale === 'en' ? '/en/' : '/')
+
+/** Reads the locale from the current path: `/en/...` is English, anything else Spanish. */
+const localeFromPath = (): Locale | null => {
+  if (typeof location === 'undefined') return null
+
+  return /^\/en(\/|$)/.test(location.pathname) ? 'en' : 'es'
+}
+
 // Detect browser language, default to Spanish
 const detectBrowserLocale = (): Locale => {
   if (typeof navigator === 'undefined') return defaultLocale
@@ -14,15 +24,24 @@ const detectBrowserLocale = (): Locale => {
   return 'es'
 }
 
-// Get initial locale from localStorage or browser detection
+/**
+ * The URL wins.
+ *
+ * A visitor arriving from a search result or a shared link must get the language that
+ * URL promises, whatever their browser or a previous visit says. Stored and detected
+ * preferences only decide where a first visit to `/` is sent.
+ */
 const getInitialLocale = (): Locale => {
+  const fromPath = localeFromPath()
+  if (fromPath) return fromPath
+
   if (typeof localStorage !== 'undefined') {
     const stored = localStorage.getItem(STORAGE_KEY)
     if (stored === 'es' || stored === 'en') {
       return stored
     }
   }
-  // First visit: detect browser language
+
   return detectBrowserLocale()
 }
 
@@ -110,10 +129,25 @@ const setLocale = (newLocale: Locale): void => {
 }
 
 /**
- * Toggle between Spanish and English
+ * Switch language by going to that language's URL.
+ *
+ * A full navigation, not a state change: the other locale is a different document
+ * with its own prerendered HTML and metadata, and the address bar has to agree with
+ * what is on screen so the page can be shared or bookmarked.
  */
 const toggleLocale = (): void => {
-  setLocale(locale.value === 'es' ? 'en' : 'es')
+  const next: Locale = locale.value === 'es' ? 'en' : 'es'
+
+  if (typeof localStorage !== 'undefined') {
+    localStorage.setItem(STORAGE_KEY, next)
+  }
+
+  if (typeof location === 'undefined') {
+    locale.value = next
+    return
+  }
+
+  location.assign(`${pathForLocale(next)}${location.hash}`)
 }
 
 export function useI18n() {
