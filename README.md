@@ -13,8 +13,10 @@ automation and technical consulting, backed by 10+ years of full-stack work.
 
 ## Features
 
-- **Bilingual (ES/EN)** — custom lightweight i18n layer, locale detected from the
-  browser and persisted in `localStorage`; `<html lang>` follows the active locale
+- **Bilingual (ES/EN), indexable** — each language has its own URL (`/` and `/en/`),
+  prerendered to static HTML with its own metadata and reciprocal `hreflang`
+- **Editable without code** — content comes from a snapshot the
+  [admin](https://github.com/MarceTT/portfolio-admin) syncs at build time
 - **Contact form** — vee-validate + Zod validation, submitted to Netlify Forms
 - **SEO** — Open Graph and Twitter cards, JSON-LD (`Person` + `ProfessionalService`),
   canonical URL, sitemap and robots
@@ -57,14 +59,36 @@ src/
 
 ### Content model
 
-Section content is split in two, so copy can be translated and data stays single-sourced:
+All content lives in `src/content/content.json`, a committed snapshot. `src/data/*`
+and `src/i18n/*` derive their exports from it, so components kept the shape they
+already consumed.
 
-- `src/data/*` owns what does not change between languages: images, technology
-  names, links, metric values and ISO dates.
-- `src/i18n/{es,en}.ts` owns every visible string, keyed by the same stable `id`.
+**The site never queries a database at runtime.** The snapshot is refreshed during
+the build by `npm run sync:content`, and every failure path keeps the committed copy
+and exits 0 — an unreachable, paused or malformed database costs an update, never a
+deploy.
 
-`TranslationSchema` (declared in `src/i18n/es.ts`) is the contract: `en.ts` is typed
-against it, so a key added to one language and forgotten in the other fails the build.
+```
+admin ──save──▶ Postgres ──sync (build)──▶ src/content/content.json ──▶ static site
+```
+
+`TranslationSchema` (in `src/i18n/types.ts`) is the contract both languages satisfy.
+
+### Localisation and SEO
+
+The locale is read from the path first, so a shared link always shows the language it
+promises, whatever the visitor's browser or previous visit says. Switching language
+navigates to the other URL rather than mutating state.
+
+`npm run prerender` renders the built SPA once per locale and writes each as complete
+static HTML, so a crawler that never runs JavaScript still receives the whole page in
+the right language:
+
+| | |
+|---|---|
+| `dist/index.html` | Spanish, canonical `/` |
+| `dist/en/index.html` | English, canonical `/en/` |
+| `dist/sitemap.xml` | both locales with alternates |
 
 ## Getting Started
 
@@ -79,11 +103,18 @@ against it, so a key added to one language and forgotten in the other fails the 
 git clone https://github.com/MarceTT/portfolio-v2.git
 cd portfolio-v2
 
-npm install      # install dependencies
-npm run dev      # start development server
-npm run build    # type-check (vue-tsc) + production build
-npm run preview  # preview the production build
+npm install           # install dependencies
+npm run dev           # start development server
+npm run build         # sync content, type-check, compile, prerender both locales
+npm run preview       # preview the production build
+
+npm run test:sync     # the content sync keeps the snapshot on every failure
+npm run test:locales  # both locales render, cross-link and work without JavaScript
 ```
+
+`npm run build` reads `SUPABASE_URL` and `SUPABASE_SECRET_KEY` to refresh the
+content. Without them it builds from the committed snapshot and says so.
+Prerendering needs Google Chrome; without it the build leaves the SPA shell in place.
 
 > The contact form posts to Netlify Forms, which only exists on a deployed
 > Netlify site. Locally the submission fails and the form shows its error state.
@@ -128,8 +159,15 @@ Edit the CSS variables in `src/style.css`:
 
 ## Quality
 
-`npm run build` runs `vue-tsc -b` first, so type errors block the build. There is
-no test runner, linter or formatter configured yet.
+`npm run build` type-checks with `vue-tsc` before compiling, so type errors block the
+build. There is no test runner; the two checks that matter run as standalone scripts:
+
+- `npm run test:sync` — ten paths through the content sync, proving a content
+  problem can never break a deploy
+- `npm run test:locales` — fourteen checks over the prerendered output, including
+  what a crawler without JavaScript receives
+
+No linter or formatter is configured yet.
 
 ## License
 
