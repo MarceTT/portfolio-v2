@@ -8,7 +8,10 @@
 //
 // Required environment (Netlify build variables, never VITE_ prefixed):
 //   SUPABASE_URL
-//   SUPABASE_SERVICE_ROLE_KEY
+//   SUPABASE_SECRET_KEY          (sb_secret_…)
+//
+// The legacy SUPABASE_SERVICE_ROLE_KEY is still accepted: Supabase deprecates the
+// JWT-based service_role key at the end of 2026, and both are sent the same way.
 //
 // Usage: node scripts/sync-content.mjs
 
@@ -39,10 +42,10 @@ const keep = (reason) => {
 }
 
 const url = process.env.SUPABASE_URL
-const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+const secretKey = process.env.SUPABASE_SECRET_KEY ?? process.env.SUPABASE_SERVICE_ROLE_KEY
 
-if (!url || !serviceKey) {
-  keep('SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY is not set.')
+if (!url || !secretKey) {
+  keep('SUPABASE_URL or SUPABASE_SECRET_KEY is not set.')
 }
 
 if (!existsSync(snapshotPath)) {
@@ -57,8 +60,8 @@ const fetchTable = async (table, order) => {
 
   const response = await fetch(endpoint, {
     headers: {
-      apikey: serviceKey,
-      Authorization: `Bearer ${serviceKey}`,
+      apikey: secretKey,
+      Authorization: `Bearer ${secretKey}`,
       Accept: 'application/json',
     },
     signal: AbortSignal.timeout(20_000),

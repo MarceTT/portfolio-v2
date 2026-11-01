@@ -114,7 +114,7 @@ async function runCases() {
     [
       'unreachable host',
       null,
-      { SUPABASE_URL: 'http://127.0.0.1:5998', SUPABASE_SERVICE_ROLE_KEY: 'x' },
+      { SUPABASE_URL: 'http://127.0.0.1:5998', SUPABASE_SECRET_KEY: 'x' },
       'keeps',
     ],
     ['http 500', 'http-error', null, 'keeps'],
@@ -125,6 +125,8 @@ async function runCases() {
     ['invalid start month', 'bad-month', null, 'keeps'],
     ['valid, unchanged', 'valid', null, 'unchanged'],
     ['valid, new content', 'changed', null, 'writes'],
+    // The legacy service_role name must keep working until Supabase removes it.
+    ['legacy key name', 'changed', null, 'writes'],
   ]
 
   let port = 5610
@@ -133,11 +135,14 @@ async function runCases() {
   for (const [name, mode, envOverride, expectation] of cases) {
     let stub = null
     let env = envOverride ?? {}
+    const useLegacyKeyName = name === 'legacy key name'
 
     if (mode) {
       port += 1
       stub = await startStub(port, mode)
-      env = { SUPABASE_URL: `http://127.0.0.1:${port}`, SUPABASE_SERVICE_ROLE_KEY: 'stub' }
+      env = useLegacyKeyName
+        ? { SUPABASE_URL: `http://127.0.0.1:${port}`, SUPABASE_SERVICE_ROLE_KEY: 'stub' }
+        : { SUPABASE_URL: `http://127.0.0.1:${port}`, SUPABASE_SECRET_KEY: 'stub' }
     }
 
     const { code, output } = runSync(env)
